@@ -6,6 +6,9 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://example.com',
+	site: 'https://nuwan.dev',
+	// Update this to match your GitHub Pages URL if different
+	// For GitHub Pages: https://username.github.io/repository-name/
 	integrations: [mdx(), sitemap()],
+	output: 'static',
 });
