@@ -153,3 +153,22 @@ hr {
 	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
 	white-space: nowrap;
 }
+
+
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: rgb(var(--gray-light));
+	border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+	background: rgb(var(--gray-dark));
+	border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: rgb(var(--black));
+}

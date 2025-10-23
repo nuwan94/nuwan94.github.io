@@ -12,17 +12,6 @@ import HeaderLink from './HeaderLink.astro';
 			<HeaderLink href="/projects">Projects</HeaderLink>
 			<HeaderLink href="/about">About</HeaderLink>
 		</div>
-		<div class="social-links">
-			<a href="https://lk.linkedin.com/in/nsa94" target="_blank">
-				<span class="sr-only">Follow Nuwan on LinkedIn</span>
-			</a>
-			<a href="https://twitter.com/astrodotbuild" target="_blank">
-				
-			</a>
-			<a href="https://github.com/withastro/astro" target="_blank">
-				
-			</a>
-		</div>
 	</nav>
 </header>
 <style>
@@ -55,10 +44,6 @@ import HeaderLink from './HeaderLink.astro';
 	nav a.active {
 		text-decoration: none;
 		border-bottom-color: var(--accent);
-	}
-	.social-links,
-	.social-links a {
-		display: flex;
 	}
 	@media (max-width: 720px) {
 		.social-links {
