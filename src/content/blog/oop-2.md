@@ -2,6 +2,7 @@
 title: 'OOP Profound: Advanced Principles and Practices'
 description: 'Reaching deeper into Object-Oriented Programming principles.'
 pubDate: 'March 22, 2021'
+tags: ['Programming', 'Software Development', 'Architecture', 'OOP', 'Advanced Programming', 'SOLID Principles', 'Design Patterns', 'Software Architecture']
 ---
 
 Building upon the foundational principles of Object-Oriented Programming (OOP) discussed earlier, this post delves into more advanced concepts that further enhance the capabilities and design of OOP systems. We will explore Composition over Inheritance, SOLID Principles, Design Patterns, and Dependency Injection.

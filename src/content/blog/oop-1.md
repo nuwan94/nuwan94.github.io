@@ -2,6 +2,7 @@
 title: 'Principles of Object-Oriented Programming (OOP)'
 description: 'A beginner-friendly guide to understanding the principles of OOP.'
 pubDate: 'January 02, 2021'
+tags: ['Programming', 'Software Development', 'OOP', 'Object-Oriented Programming', 'Programming Principles', 'Beginner']
 ---
 
 Object-Oriented Programming (OOP) is a programming paradigm that uses "objects" to represent data and behavior. It is based on several key principles that help developers create modular, reusable, and maintainable code. In this blog post, we will explore the four main principles of OOP: Encapsulation, Abstraction, Inheritance, and Polymorphism.

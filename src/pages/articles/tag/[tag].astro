@@ -1,0 +1,193 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import BaseHead from '../../../components/BaseHead.astro';
+import Footer from '../../../components/Footer.astro';
+import FormattedDate from '../../../components/FormattedDate.astro';
+import Header from '../../../components/Header.astro';
+import TagsDisplay from '../../../components/TagsDisplay.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../../../consts';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+	const tags = [...new Set(posts.flatMap(post => post.data.tags))] as string[];
+	
+	return tags.map((tag) => ({
+		params: { tag: tag.toLowerCase().replace(/\s+/g, '-') },
+		props: { tag, posts }
+	}));
+}
+
+const { tag, posts } = Astro.props;
+const tagName = tag as string;
+const filteredPosts = (posts as any[]).filter(post => 
+	post.data.tags.includes(tagName)
+).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`"${tagName}" Tag - ${SITE_TITLE}`} description={`${SITE_DESCRIPTION} - Articles tagged with "${tagName}"`} />
+		<style>
+			main {
+				width: 960px;
+			}
+			.breadcrumb {
+				margin-bottom: 1rem;
+				font-size: 0.9rem;
+			}
+			.breadcrumb a {
+				color: rgb(var(--accent));
+				text-decoration: none;
+			}
+			.breadcrumb a:hover {
+				text-decoration: underline;
+			}
+			.breadcrumb span {
+				color: rgb(var(--gray));
+				margin: 0 0.5rem;
+			}
+			.tag-header {
+				text-align: center;
+				margin-bottom: 2rem;
+			}
+			.tag-header h1 {
+				color: rgb(var(--black));
+				margin: 0;
+			}
+			.tag-header p {
+				color: rgb(var(--gray));
+				margin: 0.5rem 0 0 0;
+			}
+			.tag-badge-large {
+				display: inline-block;
+				padding: 0.5rem 1rem;
+				margin: 0.5rem 0;
+				background: rgb(var(--gray-light));
+				color: rgb(var(--gray-dark));
+				border: 1px solid rgb(var(--gray-light));
+				border-radius: 20px;
+				font-size: 0.9rem;
+				font-weight: 600;
+			}
+			ul {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 2rem;
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+			}
+			ul li {
+				width: calc(50% - 1rem);
+			}
+			ul li * {
+				text-decoration: none;
+				transition: 0.2s ease;
+			}
+			ul li:first-child {
+				width: 100%;
+				margin-bottom: 1rem;
+				text-align: center;
+			}
+			ul li:first-child img {
+				width: 100%;
+			}
+			ul li:first-child .title {
+				font-size: 2.369rem;
+			}
+			ul li img {
+				margin-bottom: 0.5rem;
+				border-radius: 12px;
+			}
+			ul li a {
+				display: block;
+			}
+			.title {
+				margin: 0;
+				color: rgb(var(--black));
+				line-height: 1;
+			}
+			.date {
+				margin: 0;
+				color: rgb(var(--gray));
+			}
+			ul li a:hover h4,
+			ul li a:hover .date {
+				color: rgb(var(--accent));
+			}
+			ul a:hover img {
+				box-shadow: var(--box-shadow);
+			}
+			.no-posts {
+				text-align: center;
+				padding: 3rem;
+				color: rgb(var(--gray));
+			}
+			@media (max-width: 720px) {
+				ul {
+					gap: 0.5em;
+				}
+				ul li {
+					width: 100%;
+					text-align: center;
+				}
+				ul li:first-child {
+					margin-bottom: 0;
+				}
+				ul li:first-child .title {
+					font-size: 1.563em;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section>
+				<div class="breadcrumb">
+					<a href="/articles">All Articles</a>
+					<span>›</span>
+					<span>Tag: #{tagName}</span>
+				</div>
+				
+				<div class="tag-header">
+					<h1>Articles tagged with</h1>
+					<div class="tag-badge-large">#{tagName}</div>
+					<p>{filteredPosts.length} article{filteredPosts.length !== 1 ? 's' : ''} found</p>
+				</div>
+				
+
+				
+				{filteredPosts.length > 0 ? (
+					<ul>
+						{
+							filteredPosts.map((post) => (
+								<li>
+									<a href={`/articles/${post.id}/`}>
+										{post.data.heroImage && (
+											<Image width={720} height={360} src={post.data.heroImage} alt="" />
+										)}
+										<h4 class="title">{post.data.title}</h4>
+										<p class="date">
+											<FormattedDate date={post.data.pubDate} />
+										</p>
+									</a>
+									<TagsDisplay tags={post.data.tags} />
+								</li>
+							))
+						}
+					</ul>
+				) : (
+					<div class="no-posts">
+						<p>No articles found with this tag.</p>
+					</div>
+				)}
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
