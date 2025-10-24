@@ -2,6 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import ArwesBackground from '../components/ArwesBackground';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 ---
 
@@ -11,20 +12,23 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
-		<Header />
-		<main>
-			<h1>🧑‍💻 Hello, I'm Nuwan</h1>
-			<p>
-				I'm a developer with a passion for crafting clean, efficient, and user-friendly software solutions.
-				This site serves as my digital portfolio, where I share my projects, blog posts, and
-				thoughts on technology and programming.
-			</p>
-			<p>
-				Feel free to explore my site, check out my projects, and read my blog posts. If you'd like to
-				connect or collaborate, don't hesitate to reach out!
-			</p>
-			<p>Happy coding! 🚀</p>
-		</main>
-		<Footer />
+		<ArwesBackground client:load />
+		<div style="position: relative; z-index: 1;">
+			<Header />
+			<main>
+				<h1>🧑‍💻 Hello, I'm Nuwan</h1>
+				<p>
+					I'm a developer with a passion for crafting clean, efficient, and user-friendly software solutions.
+					This site serves as my digital portfolio, where I share my projects, blog posts, and
+					thoughts on technology and programming.
+				</p>
+				<p>
+					Feel free to explore my site, check out my projects, and read my blog posts. If you'd like to
+					connect or collaborate, don't hesitate to reach out!
+				</p>
+				<p>Happy coding! 🚀</p>
+			</main>
+			<Footer />
+		</div>
 	</body>
 </html>
