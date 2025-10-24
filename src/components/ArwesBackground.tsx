@@ -1,8 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Animator } from "@arwes/react-animator";
 import { Puffs } from "@arwes/react-bgs";
 
 const ArwesBackground: React.FC = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Check if device is mobile on mount
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    
+    // Optional: Re-check on window resize
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Don't render animation on mobile
+  if (isMobile) {
+    return null;
+  }
+
   return (
     <Animator
       active={true}
