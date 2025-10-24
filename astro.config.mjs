@@ -2,9 +2,8 @@
 
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
+import react from '@astrojs/react';
 import { defineConfig } from 'astro/config';
-
-import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
@@ -12,11 +11,11 @@ export default defineConfig({
 
   // Update this to match your GitHub Pages URL if different
   // For GitHub Pages: https://username.github.io/repository-name/
-  integrations: [mdx(), sitemap()],
+  integrations: [
+    mdx(), 
+    sitemap(),
+    react()
+  ],
 
   output: 'static',
-
-  vite: {
-    plugins: [tailwindcss()],
-  },
 });

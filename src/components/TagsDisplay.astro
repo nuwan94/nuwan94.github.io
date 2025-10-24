@@ -6,16 +6,16 @@ export interface Props {
 const { tags } = Astro.props;
 ---
 
-<div class="article-meta my-6">
+<div class="article-meta">
 	{tags && tags.length > 0 && (
 		<div class="tags-section">
-			<div class="tags-list flex flex-wrap gap-2">
+			<div class="tags-list">
 				{tags.map((tag) => (
 					<a
 						href={`/articles/tag/${tag.toLowerCase().replace(/\s+/g, '-')}`}
-						class="tag-link px-3 py-1.5 text-xs font-medium text-accent bg-accent/5 hover:bg-accent hover:text-white hover:border-accent hover:shadow-sm hover:-translate-y-0.5 transition-all duration-200 ease-out rounded-md border border-accent/20"
+						class="tag-link"
 					>
-						#{tag}
+						<span class="tag-hash">#</span>{tag}
 					</a>
 				))}
 			</div>
@@ -23,5 +23,43 @@ const { tags } = Astro.props;
 	)}
 </div>
 
+<style>
+	.article-meta {
+		margin: 1.5rem 0;
+	}
+
+	.tags-list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.tag-link {
+		display: inline-block;
+		padding: 0.375rem 0.75rem;
+		font-size: 0.75rem;
+		font-weight: 500;
+		color: var(--color-text-secondary);
+		background: rgba(0, 217, 255, 0.1);
+		border: 1px solid var(--color-border-dim);
+		border-radius: 4px;
+		text-decoration: none;
+		transition: all var(--duration-normal) ease;
+		font-family: var(--font-family-mono);
+	}
+
+	.tag-hash {
+		color: var(--color-accent);
+		margin-right: 0.125rem;
+	}
+
+	.tag-link:hover {
+		color: var(--color-primary);
+		background: rgba(0, 217, 255, 0.2);
+		border-color: var(--color-border);
+		transform: translateY(-2px);
+		box-shadow: 0 0 10px rgba(0, 217, 255, 0.4);
+	}
+</style>
 
 

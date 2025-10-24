@@ -9,15 +9,21 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@arwes/react": "^1.0.0-next.25020502",
+    "@arwes/react-animator": "^1.0.0-next.25020502",
+    "@arwes/react-bgs": "^1.0.0-next.25020502",
+    "@arwes/react-core": "^1.0.0-next.25020502",
     "@astrojs/mdx": "^4.3.8",
+    "@astrojs/react": "^4.4.0",
     "@astrojs/rss": "^4.0.13",
     "@astrojs/sitemap": "^3.6.0",
-    "@tailwindcss/vite": "^4.1.16",
     "astro": "^5.15.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "sharp": "^0.34.3"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.19",
-    "tailwindcss": "^4.1.16"
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2"
   }
 }
