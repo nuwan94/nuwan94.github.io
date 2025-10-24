@@ -1,150 +1,131 @@
 ---
-import { Image } from 'astro:assets';
-import { getCollection } from 'astro:content';
-import BaseHead from '../../components/BaseHead.astro';
-import Footer from '../../components/Footer.astro';
-import FormattedDate from '../../components/FormattedDate.astro';
-import Header from '../../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import BaseHead from "../../components/BaseHead.astro";
+import Footer from "../../components/Footer.astro";
+import FormattedDate from "../../components/FormattedDate.astro";
+import Header from "../../components/Header.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+
+const generateRandomGradient = () => {
+  const colors = [
+	"ff9a9e",
+	"fad0c4",
+	"fbc2eb",
+	"a18cd1",
+	"fbc7aa",
+	"ffdde1",
+	"96e6a1",
+	"4bc0c8",
+	"43cea2",
+	"185a9d",
+  ];
+  const from =
+	colors[Math.floor(Math.random() * colors.length)];
+  let to = colors[Math.floor(Math.random() * colors.length)];
+  while (to === from) {
+	to = colors[Math.floor(Math.random() * colors.length)];
+  }
+  return { from, to };
+};
 
 // Use all posts without filtering
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style>
-			main {
-				width: 960px;
-			}
-			ul {
-				display: grid;
-				grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-				gap: 2rem;
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-			ul li {
-				height: 100%;
-				border: 2px solid rgb(var(--gray-light));
-				border-radius: 16px;
-				overflow: hidden;
-				background: white;
-				transition: all 0.3s ease;
-				box-shadow: 0 2px 8px rgba(var(--black), 0.05);
-			}
-			ul li:hover {
-				border-color: rgb(var(--accent-light));
-				transform: translateY(-4px);
-				box-shadow: 0 8px 24px rgba(var(--black), 0.12);
-			}
-			ul li a {
-				display: flex;
-				flex-direction: column;
-				height: 100%;
-				text-decoration: none;
-				transition: 0.2s ease;
-			}
-			ul li img {
-				width: 100%;
-				height: 200px;
-				object-fit: cover;
-				border-radius: 0;
-			}
-			.post-content {
-				padding: 1.5rem;
-				display: flex;
-				flex-direction: column;
-				flex-grow: 1;
-				justify-content: space-between;
-			}
-			.post-header {
-				margin-bottom: 1rem;
-			}
-			.title {
-				margin: 0 0 0.75rem 0;
-				color: rgb(var(--black));
-				line-height: 1.3;
-				font-size: 1.25rem;
-				font-weight: 600;
-			}
-			.date {
-				margin: 0;
-				color: rgb(var(--gray));
-				font-size: 0.9rem;
-				font-weight: 500;
-			}
-			ul li a:hover .title {
-				color: rgb(var(--accent));
-			}
-			ul li a:hover .date {
-				color: rgb(var(--accent-light));
-			}
-			@media (max-width: 720px) {
-				ul {
-					grid-template-columns: 1fr;
-					gap: 1.5rem;
-				}
-				ul li img {
-					height: 180px;
-				}
-				.post-content {
-					padding: 1.25rem;
-				}
-				.title {
-					font-size: 1.1rem;
-				}
-			}
-			@media (max-width: 480px) {
-				ul {
-					gap: 1rem;
-				}
-				ul li img {
-					height: 160px;
-				}
-				.post-content {
-					padding: 1rem;
-				}
-				.title {
-					font-size: 1rem;
-					margin-bottom: 0.5rem;
-				}
-			}
-		</style>
-	</head>
-	<body>
-		<Header />
-		<main>
-			<section>
-				<ul>
-					{
-						posts.map((post) => (
-							<li>
-								<a href={`/articles/${post.id}/`}>
-									{post.data.heroImage && (
-										<Image width={720} height={360} src={post.data.heroImage} alt="" />
-									)}
-									<div class="post-content">
-										<div class="post-header">
-											<h4 class="title">{post.data.title}</h4>
-										</div>
-										<p class="date">
-											<FormattedDate date={post.data.pubDate} />
-										</p>
-									</div>
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</section>
-		</main>
-		<Footer />
-	</body>
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main class="w-full py-12">
+      <!-- Hero Section -->
+      <section class="text-center mb-16 px-4">
+        <h1 class="text-4xl md:text-5xl font-bold text-brand-black mb-6">
+          Articles
+        </h1>
+        <p class="text-lg text-brand-gray max-w-2xl mx-auto leading-relaxed">
+          Thoughts, insights, and tutorials on software development,
+          architecture, and technology. Explore my latest writings and
+          discoveries.
+        </p>
+        <div class="w-24 h-1 bg-accent mx-auto mt-8 rounded-full"></div>
+      </section>
+
+      <!-- Articles Grid -->
+      <!-- Articles Grid -->
+      <section class="px-4">
+        <div class="grid grid-cols-1 gap-8">
+          {
+            posts.map((post) => (
+              <article class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 ease-out hover:-translate-y-2 border border-brand-gray-light/20">
+                <a
+                  href={`/articles/${post.id}/`}
+                  class="block h-full no-underline"
+                >
+                  <div class="relative overflow-hidden">
+                    <Image
+                      width={720}
+                      height={360}
+                      src={
+                        post.data.heroImage
+                          ? post.data.heroImage.src
+                          : `https://via.assets.so/img.jpg?w=720&h=360&gradientFrom=${generateRandomGradient().from}&gradientTo=${generateRandomGradient().to}&gradientAngle=135&&text= &f=png`
+                      }
+                      alt={post.data.title}
+                      class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                    <div class="absolute inset-0 bg-linear-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </div>
+                  <div class="p-6">
+                    <div class="mb-4">
+                      <h3 class="text-xl font-bold text-brand-black group-hover:text-accent transition-colors duration-200 leading-tight mb-3">
+                        {post.data.title}
+                      </h3>
+                      <p class="text-brand-gray text-sm leading-relaxed line-clamp-3">
+                        {post.data.description}
+                      </p>
+                    </div>
+
+                    {post.data.tags && post.data.tags.length > 0 && (
+                      <div class="flex flex-wrap gap-2 mb-4">
+                        {post.data.tags.slice(0, 3).map((tag) => (
+                          <span class="inline-block px-3 py-1 text-xs font-medium bg-accent/10 text-accent rounded-full border border-accent/20">
+                            {tag}
+                          </span>
+                        ))}
+                        {post.data.tags.length > 3 && (
+                          <span class="inline-block px-3 py-1 text-xs font-medium bg-brand-gray-light text-brand-gray rounded-full">
+                            +{post.data.tags.length - 3}
+                          </span>
+                        )}
+                      </div>
+                    )}
+
+                    <div class="flex items-center justify-between text-sm text-brand-gray">
+                      <time
+                        class="font-medium"
+                        datetime={post.data.pubDate.toISOString()}
+                      >
+                        <FormattedDate date={post.data.pubDate} />
+                      </time>
+                      <span class="text-accent font-medium group-hover:translate-x-1 transition-transform duration-200">
+                        Read more →
+                      </span>
+                    </div>
+                  </div>
+                </a>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </body>
 </html>

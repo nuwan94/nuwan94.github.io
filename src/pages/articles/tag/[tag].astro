@@ -5,7 +5,6 @@ import BaseHead from '../../../components/BaseHead.astro';
 import Footer from '../../../components/Footer.astro';
 import FormattedDate from '../../../components/FormattedDate.astro';
 import Header from '../../../components/Header.astro';
-import TagsDisplay from '../../../components/TagsDisplay.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../../consts';
 
 export async function getStaticPaths() {
@@ -24,166 +23,130 @@ const filteredPosts = (posts as any[]).filter(post =>
 	post.data.tags.includes(tagName)
 ).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-
+const generateRandomGradient = () => {
+  const colors = [
+	"ff9a9e",
+	"fad0c4",
+	"fbc2eb",
+	"a18cd1",
+	"fbc7aa",
+	"ffdde1",
+	"96e6a1",
+	"4bc0c8",
+	"43cea2",
+	"185a9d",
+  ];
+  const from =
+	colors[Math.floor(Math.random() * colors.length)];
+  let to = colors[Math.floor(Math.random() * colors.length)];
+  while (to === from) {
+	to = colors[Math.floor(Math.random() * colors.length)];
+  }
+  return { from, to };
+};
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
 		<BaseHead title={`"${tagName}" Tag - ${SITE_TITLE}`} description={`${SITE_DESCRIPTION} - Articles tagged with "${tagName}"`} />
-		<style>
-			main {
-				width: 960px;
-			}
-			.breadcrumb {
-				margin-bottom: 1rem;
-				font-size: 0.9rem;
-			}
-			.breadcrumb a {
-				color: rgb(var(--accent));
-				text-decoration: none;
-			}
-			.breadcrumb a:hover {
-				text-decoration: underline;
-			}
-			.breadcrumb span {
-				color: rgb(var(--gray));
-				margin: 0 0.5rem;
-			}
-			.tag-header {
-				text-align: center;
-				margin-bottom: 2rem;
-			}
-			.tag-header h1 {
-				color: rgb(var(--black));
-				margin: 0;
-			}
-			.tag-header p {
-				color: rgb(var(--gray));
-				margin: 0.5rem 0 0 0;
-			}
-			.tag-badge-large {
-				display: inline-block;
-				padding: 0.5rem 1rem;
-				margin: 0.5rem 0;
-				background: rgb(var(--gray-light));
-				color: rgb(var(--gray-dark));
-				border: 1px solid rgb(var(--gray-light));
-				border-radius: 20px;
-				font-size: 0.9rem;
-				font-weight: 600;
-			}
-			ul {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 2rem;
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-			ul li {
-				width: calc(50% - 1rem);
-			}
-			ul li * {
-				text-decoration: none;
-				transition: 0.2s ease;
-			}
-			ul li:first-child {
-				width: 100%;
-				margin-bottom: 1rem;
-				text-align: center;
-			}
-			ul li:first-child img {
-				width: 100%;
-			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
-			}
-			ul li img {
-				margin-bottom: 0.5rem;
-				border-radius: 12px;
-			}
-			ul li a {
-				display: block;
-			}
-			.title {
-				margin: 0;
-				color: rgb(var(--black));
-				line-height: 1;
-			}
-			.date {
-				margin: 0;
-				color: rgb(var(--gray));
-			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
-			}
-			ul a:hover img {
-				box-shadow: var(--box-shadow);
-			}
-			.no-posts {
-				text-align: center;
-				padding: 3rem;
-				color: rgb(var(--gray));
-			}
-			@media (max-width: 720px) {
-				ul {
-					gap: 0.5em;
-				}
-				ul li {
-					width: 100%;
-					text-align: center;
-				}
-				ul li:first-child {
-					margin-bottom: 0;
-				}
-				ul li:first-child .title {
-					font-size: 1.563em;
-				}
-			}
-		</style>
 	</head>
 	<body>
 		<Header />
-		<main>
-			<section>
-				<div class="breadcrumb">
-					<a href="/articles">All Articles</a>
-					<span>›</span>
-					<span>Tag: #{tagName}</span>
+		<main class="w-full py-12">
+			<!-- Hero Section -->
+			<section class="text-center mb-16 px-4">
+				<h1 class="text-4xl md:text-5xl font-bold text-brand-black mb-6">
+					Articles tagged with
+				</h1>
+				<div class="inline-block px-4 py-2 text-sm font-medium bg-accent/10 text-accent rounded-full border border-accent/20 mb-4">
+					#{tagName}
 				</div>
-				
-				<div class="tag-header">
-					<h1>Articles tagged with</h1>
-					<div class="tag-badge-large">#{tagName}</div>
-					<p>{filteredPosts.length} article{filteredPosts.length !== 1 ? 's' : ''} found</p>
-				</div>
-				
+				<p class="text-lg text-brand-gray max-w-2xl mx-auto leading-relaxed">
+					{filteredPosts.length} article{filteredPosts.length !== 1 ? 's' : ''} found with this tag.
+					Explore related content and insights.
+				</p>
+				<div class="w-24 h-1 bg-accent mx-auto mt-8 rounded-full"></div>
+			</section>
 
-				
+			<!-- Breadcrumb -->
+			<section class="mb-8 px-4">
+				<nav class="flex items-center gap-2 text-sm text-brand-gray">
+					<a href="/articles" class="hover:text-accent transition-colors duration-200">All Articles</a>
+					<span class="text-brand-gray/50">›</span>
+					<span class="text-accent font-medium">#{tagName}</span>
+				</nav>
+			</section>
+
+			<!-- Articles Grid -->
+			<section class="px-4">
 				{filteredPosts.length > 0 ? (
-					<ul>
+					<div class="grid grid-cols-1 gap-8">
 						{
 							filteredPosts.map((post) => (
-								<li>
-									<a href={`/articles/${post.id}/`}>
-										{post.data.heroImage && (
-											<Image width={720} height={360} src={post.data.heroImage} alt="" />
-										)}
-										<h4 class="title">{post.data.title}</h4>
-										<p class="date">
-											<FormattedDate date={post.data.pubDate} />
-										</p>
+								<article class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 ease-out hover:-translate-y-2 border border-brand-gray-light/20">
+									<a href={`/articles/${post.id}/`} class="block h-full no-underline">
+										<div class="relative overflow-hidden">
+											<Image
+												width={720}
+												height={360}
+												src={
+													post.data.heroImage
+														? post.data.heroImage.src
+														: `https://via.assets.so/img.jpg?w=720&h=360&gradientFrom=${generateRandomGradient().from}&gradientTo=${generateRandomGradient().to}&gradientAngle=135&&text= &f=png`
+												}
+												alt={post.data.title}
+												class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+											/>
+											<div class="absolute inset-0 bg-linear-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+										</div>
+										<div class="p-6">
+											<div class="mb-4">
+												<h3 class="text-xl font-bold text-brand-black group-hover:text-accent transition-colors duration-200 leading-tight mb-3">
+													{post.data.title}
+												</h3>
+												<p class="text-brand-gray text-sm leading-relaxed line-clamp-3">
+													{post.data.description}
+												</p>
+											</div>
+
+											{post.data.tags && post.data.tags.length > 0 && (
+												<div class="flex flex-wrap gap-2 mb-4">
+													{post.data.tags.slice(0, 3).map((tagItem: string) => (
+														<span class="inline-block px-3 py-1 text-xs font-medium bg-accent/10 text-accent rounded-full border border-accent/20">
+															{tagItem}
+														</span>
+													))}
+													{post.data.tags.length > 3 && (
+														<span class="inline-block px-3 py-1 text-xs font-medium bg-brand-gray-light text-brand-gray rounded-full">
+															+{post.data.tags.length - 3}
+														</span>
+													)}
+												</div>
+											)}
+
+											<div class="flex items-center justify-between text-sm text-brand-gray">
+												<time class="font-medium" datetime={post.data.pubDate.toISOString()}>
+													<FormattedDate date={post.data.pubDate} />
+												</time>
+												<span class="text-accent font-medium group-hover:translate-x-1 transition-transform duration-200">
+													Read more →
+												</span>
+											</div>
+										</div>
 									</a>
-									<TagsDisplay tags={post.data.tags} />
-								</li>
+								</article>
 							))
 						}
-					</ul>
+					</div>
 				) : (
-					<div class="no-posts">
-						<p>No articles found with this tag.</p>
+					<div class="text-center py-16">
+						<div class="text-6xl mb-4">🏷️</div>
+						<h3 class="text-2xl font-bold text-brand-black mb-4">No articles found</h3>
+						<p class="text-brand-gray mb-8">There are no articles tagged with "#{tagName}" yet.</p>
+						<a href="/articles" class="inline-block px-6 py-3 bg-accent text-white rounded-lg font-medium hover:bg-accent-dark transition-colors duration-200">
+							Browse All Articles
+						</a>
 					</div>
 				)}
 			</section>

@@ -6,19 +6,16 @@ export interface Props {
 const { tags } = Astro.props;
 ---
 
-<div class="article-meta">
+<div class="article-meta my-6">
 	{tags && tags.length > 0 && (
-		<div class="tags-container">
-			<div class="tags-header">
-				<svg class="tags-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-					<path d="M5.5 7A1.5 1.5 0 004 8.5v7A1.5 1.5 0 005.5 17h7a1.5 1.5 0 001.06-.44L21.5 8.62a1.5 1.5 0 000-2.12l-5.88-5.88a1.5 1.5 0 00-2.12 0L5.56 8.56A1.5 1.5 0 005.5 9.62V7zm3 4.5A1.5 1.5 0 107 10a1.5 1.5 0 001.5 1.5z"/>
-				</svg>
-				<span class="meta-label">Tags</span>
-			</div>
-			<div class="tags-list">
+		<div class="tags-section">
+			<div class="tags-list flex flex-wrap gap-2">
 				{tags.map((tag) => (
-					<a href={`/articles/tag/${tag.toLowerCase().replace(/\s+/g, '-')}`} class="tag-badge">
-						<span class="tag-text">{tag}</span>
+					<a
+						href={`/articles/tag/${tag.toLowerCase().replace(/\s+/g, '-')}`}
+						class="tag-link px-3 py-1.5 text-xs font-medium text-accent bg-accent/5 hover:bg-accent hover:text-white hover:border-accent hover:shadow-sm hover:-translate-y-0.5 transition-all duration-200 ease-out rounded-md border border-accent/20"
+					>
+						#{tag}
 					</a>
 				))}
 			</div>
@@ -26,145 +23,5 @@ const { tags } = Astro.props;
 	)}
 </div>
 
-<style>
-	.article-meta {
-		margin: 1.5rem 0;
-	}
 
-	.tags-container {
-		background: linear-gradient(135deg, rgb(var(--gray-light)) 0%, rgba(var(--gray-light), 0.8) 100%);
-		padding: 1rem 1.25rem;
-		border-radius: 12px;
-		border: 1px solid rgba(var(--gray), 0.1);
-		box-shadow: 0 2px 8px rgba(var(--black), 0.05);
-	}
 
-	.tags-header {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-		margin-bottom: 0.75rem;
-		padding-bottom: 0.5rem;
-		border-bottom: 1px solid rgba(var(--gray), 0.15);
-	}
-
-	.tags-icon {
-		color: rgb(var(--accent));
-		opacity: 0.8;
-	}
-
-	.meta-label {
-		font-weight: 600;
-		color: rgb(var(--gray-dark));
-		font-size: 0.9rem;
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
-	}
-
-	.tags-list {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.6rem;
-	}
-
-	.tag-badge {
-		position: relative;
-		padding: 0.5rem 1rem;
-		background: linear-gradient(135deg, rgb(var(--accent-light)) 0%, rgba(var(--accent-light), 0.9) 100%);
-		color: rgb(var(--accent));
-		text-decoration: none;
-		border-radius: 20px;
-		font-size: 0.85rem;
-		font-weight: 500;
-		border: 1.5px solid rgba(var(--accent), 0.2);
-		cursor: pointer;
-		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-		display: inline-flex;
-		align-items: center;
-		box-shadow: 0 1px 3px rgba(var(--black), 0.1);
-		overflow: hidden;
-	}
-
-	.tag-badge::before {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: -100%;
-		width: 100%;
-		height: 100%;
-		background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-		transition: left 0.5s;
-	}
-
-	.tag-badge:hover::before {
-		left: 100%;
-	}
-
-	.tag-badge:hover {
-		background: linear-gradient(135deg, rgb(var(--accent)) 0%, rgba(var(--accent-dark), 0.95) 100%);
-		color: white;
-		border-color: rgb(var(--accent));
-		transform: translateY(-2px) scale(1.02);
-		box-shadow: 0 4px 12px rgba(var(--accent), 0.3);
-	}
-
-	.tag-text {
-		position: relative;
-		z-index: 1;
-	}
-
-	@media (max-width: 720px) {
-		.article-meta {
-			margin: 1rem 0;
-		}
-
-		.tags-container {
-			padding: 0.875rem 1rem;
-			border-radius: 10px;
-		}
-
-		.tags-header {
-			margin-bottom: 0.6rem;
-			padding-bottom: 0.4rem;
-		}
-
-		.tags-icon {
-			width: 14px;
-			height: 14px;
-		}
-
-		.meta-label {
-			font-size: 0.8rem;
-		}
-
-		.tags-list {
-			gap: 0.5rem;
-		}
-
-		.tag-badge {
-			padding: 0.4rem 0.8rem;
-			font-size: 0.8rem;
-			border-radius: 16px;
-		}
-
-		.tag-badge:hover {
-			transform: translateY(-1px) scale(1.01);
-		}
-	}
-
-	@media (max-width: 480px) {
-		.tags-container {
-			padding: 0.75rem;
-		}
-
-		.tags-list {
-			gap: 0.4rem;
-		}
-
-		.tag-badge {
-			padding: 0.35rem 0.7rem;
-			font-size: 0.75rem;
-			border-radius: 14px;
-		}
-	}
-</style>
