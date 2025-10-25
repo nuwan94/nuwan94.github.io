@@ -1,7 +1,10 @@
 ---
 import HeaderComponent from './Header';
+import { getCollection } from "astro:content";
 
 const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
+const posts = await getCollection("blog");
+const articleCount = posts.length;
 ---
 
-<HeaderComponent client:load pathname={pathname} />
+<HeaderComponent client:load pathname={pathname} articleCount={articleCount} />

@@ -4,9 +4,10 @@ import './Header.css';
 
 interface HeaderProps {
   pathname: string;
+  articleCount: number;
 }
 
-const Header = ({ pathname }: HeaderProps) => {
+const Header = ({ pathname, articleCount }: HeaderProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const openMobileMenu = () => {
@@ -50,6 +51,7 @@ const Header = ({ pathname }: HeaderProps) => {
               className={`nav-link ${isActive('/articles') ? 'active' : ''}`}
             >
               <span className="nav-link-brackets">&gt;</span> Articles
+              <span className="nav-count">({articleCount})</span>
             </a>
             <a 
               href="/projects" 
@@ -120,6 +122,7 @@ const Header = ({ pathname }: HeaderProps) => {
             onClick={closeMobileMenu}
           >
             <span className="nav-link-brackets">&gt;</span> Articles
+            <span className="nav-count">[{articleCount}]</span>
           </a>
           <a 
             href="/projects" 
