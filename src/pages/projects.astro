@@ -1,26 +1,335 @@
 ---
+import { getCollection } from "astro:content";
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import ArwesBackground from '../components/ArwesBackground';
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+
+// Helper function to convert "Month YYYY" to a comparable date
+const parseMonthYear = (dateStr: string): Date => {
+  const [month, year] = dateStr.split(' ');
+  const monthIndex = new Date(Date.parse(month + " 1, 2000")).getMonth();
+  return new Date(parseInt(year), monthIndex);
+};
+
+const allProjects = await getCollection("projects");
+console.log("Projects found:", allProjects.length, allProjects.map(p => p.id));
+
+const projects = allProjects.sort(
+  (a, b) => {
+    // Featured projects first
+    if (a.data.featured && !b.data.featured) return -1;
+    if (!a.data.featured && b.data.featured) return 1;
+    // Then by start date (most recent first)
+    const dateA = parseMonthYear(a.data.startDate);
+    const dateB = parseMonthYear(b.data.startDate);
+    return dateB.getTime() - dateA.getTime();
+  }
+);
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <BaseHead title={`Projects - ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+    <style>
+      .projects-main {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+      }
+
+      .hero-section {
+        text-align: center;
+        margin-bottom: 3rem;
+        padding: 2rem 0;
+      }
+
+      .hero-title {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: var(--color-primary);
+        text-shadow: 0 0 20px rgba(0, 217, 255, 0.6);
+      }
+
+      .hero-description {
+        font-size: 1.2rem;
+        color: var(--color-text-body);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .project-card {
+        background: linear-gradient(135deg, rgba(0, 217, 255, 0.03) 0%, rgba(0, 217, 255, 0.01) 100%);
+        border: 1px solid var(--color-border-dim);
+        border-radius: 8px;
+        padding: 1.5rem;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .project-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .project-card:hover {
+        border-color: var(--color-primary);
+        box-shadow: 0 8px 24px rgba(0, 217, 255, 0.2);
+        transform: translateY(-4px);
+      }
+
+      .project-card:hover::before {
+        opacity: 1;
+      }
+
+      .project-card.featured {
+        border-color: var(--color-accent);
+        background: linear-gradient(135deg, rgba(0, 217, 255, 0.08) 0%, rgba(0, 217, 255, 0.03) 100%);
+      }
+
+      .featured-badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        background: rgba(255, 200, 0, 0.15);
+        border: 1px solid rgba(255, 200, 0, 0.3);
+        border-radius: 12px;
+        color: #ffc800;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 1rem;
+      }
+
+      .project-header {
+        margin-bottom: 1rem;
+      }
+
+      .project-title {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--color-primary);
+      }
+
+      .project-title a {
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.3s ease;
+      }
+
+      .project-title a:hover {
+        color: var(--color-accent);
+        text-shadow: 0 0 10px rgba(0, 217, 255, 0.6);
+      }
+
+      .project-category {
+        font-size: 0.875rem;
+        color: var(--color-text-muted);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .project-description {
+        color: var(--color-text-body);
+        line-height: 1.6;
+        margin: 1rem 0;
+      }
+
+      .project-meta {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin: 1rem 0;
+        font-size: 0.875rem;
+        color: var(--color-text-muted);
+      }
+
+      .status-badge {
+        display: inline-block;
+        padding: 0.25rem 0.65rem;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: capitalize;
+      }
+
+      .status-completed {
+        background: rgba(0, 255, 100, 0.15);
+        color: #00ff64;
+        border: 1px solid rgba(0, 255, 100, 0.3);
+      }
+
+      .status-in-progress {
+        background: rgba(255, 200, 0, 0.15);
+        color: #ffc800;
+        border: 1px solid rgba(255, 200, 0, 0.3);
+      }
+
+      .status-archived {
+        background: rgba(128, 128, 128, 0.15);
+        color: #a0a0a0;
+        border: 1px solid rgba(128, 128, 128, 0.3);
+      }
+
+      .project-technologies {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin: 1rem 0;
+      }
+
+      .tech-badge {
+        padding: 0.25rem 0.65rem;
+        background: rgba(0, 217, 255, 0.1);
+        border: 1px solid var(--color-border-dim);
+        border-radius: 4px;
+        color: var(--color-text-secondary);
+        font-size: 0.75rem;
+      }
+
+      .project-links {
+        display: flex;
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--color-border-dim);
+      }
+
+      .project-link {
+        padding: 0.5rem 1rem;
+        background: transparent;
+        border: 1px solid var(--color-border-dim);
+        border-radius: 4px;
+        color: var(--color-primary);
+        text-decoration: none;
+        font-size: 0.875rem;
+        transition: all 0.3s ease;
+        flex: 1;
+        text-align: center;
+      }
+
+      .project-link:hover {
+        background: rgba(0, 217, 255, 0.1);
+        border-color: var(--color-primary);
+        box-shadow: 0 4px 12px rgba(0, 217, 255, 0.3);
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 4rem 2rem;
+        color: var(--color-text-muted);
+      }
+
+      @media (max-width: 768px) {
+        .hero-title {
+          font-size: 2rem;
+        }
+
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .project-links {
+          flex-direction: column;
+        }
+      }
+    </style>
   </head>
   <body>
     <ArwesBackground client:load />
     <div style="position: relative; z-index: 1;">
       <Header />
-      <main>
-        <h1>My Projects</h1>
-        <p>
-          Welcome to my projects page! Here are some of the projects I've worked
-          on:
-        </p>
+      <main class="projects-main">
+        <!-- Hero Section -->
+        <section class="hero-section">
+          <h1 class="hero-title">
+            <span style="color: var(--color-accent);">&gt;&gt;</span> My Projects
+          </h1>
+          <p class="hero-description">
+            A showcase of my work across various technologies and domains. 
+            Each project represents a unique challenge and learning experience.
+          </p>
+        </section>
+
+        <!-- Projects Grid -->
+        {projects.length === 0 ? (
+          <div class="empty-state">
+            <p>No projects yet. Check back soon!</p>
+          </div>
+        ) : (
+          <div class="projects-grid">
+            {projects.map((project) => (
+              <article class={`project-card ${project.data.featured ? 'featured' : ''}`}>
+                {project.data.featured && (
+                  <div class="featured-badge">⭐ Featured</div>
+                )}
+
+                <div class="project-header">
+                  <div class="project-category">{project.data.category}</div>
+                  <h2 class="project-title">
+                    <a href={`/projects/${project.id}`}>{project.data.title}</a>
+                  </h2>
+                </div>
+
+                <p class="project-description">{project.data.description}</p>
+
+                <div class="project-meta">
+                  <span class={`status-badge status-${project.data.status}`}>
+                    {project.data.status}
+                  </span>
+                  <span>
+                    {project.data.startDate}
+                  </span>
+                </div>
+
+                {project.data.technologies && project.data.technologies.length > 0 && (
+                  <div class="project-technologies">
+                    {project.data.technologies.slice(0, 4).map((tech) => (
+                      <span class="tech-badge">{tech}</span>
+                    ))}
+                    {project.data.technologies.length > 4 && (
+                      <span class="tech-badge">+{project.data.technologies.length - 4}</span>
+                    )}
+                  </div>
+                )}
+
+                <div class="project-links">
+                  <a href={`/projects/${project.id}`} class="project-link">
+                    View Details →
+                  </a>
+                  {project.data.githubUrl && (
+                    <a href={project.data.githubUrl} target="_blank" rel="noopener" class="project-link">
+                      GitHub
+                    </a>
+                  )}
+                  {project.data.liveUrl && (
+                    <a href={project.data.liveUrl} target="_blank" rel="noopener" class="project-link">
+                      Live Demo
+                    </a>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
       </main>
       <Footer />
     </div>

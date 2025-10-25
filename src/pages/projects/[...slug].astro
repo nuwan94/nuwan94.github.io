@@ -1,0 +1,273 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection, type CollectionEntry, render } from "astro:content";
+import BaseHead from "../../components/BaseHead.astro";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import ArwesBackground from "../../components/ArwesBackground";
+import FormattedDate from "../../components/FormattedDate.astro";
+
+export const getStaticPaths = (async () => {
+  const projects = await getCollection("projects");
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: project,
+  }));
+}) satisfies GetStaticPaths;
+
+type Props = CollectionEntry<"projects">;
+
+const project = Astro.props;
+const { Content } = await render(project);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={project.data.title} description={project.data.description} />
+    <style>
+      .project-header {
+        margin-bottom: 2rem;
+        padding-bottom: 2rem;
+        border-bottom: 2px solid var(--color-border-dim);
+      }
+
+      .project-title {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: var(--color-primary);
+        text-shadow: 0 0 15px rgba(0, 217, 255, 0.5);
+      }
+
+      .project-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin: 1.5rem 0;
+        padding: 1.25rem;
+        background: linear-gradient(135deg, rgba(0, 217, 255, 0.05) 0%, rgba(0, 217, 255, 0.02) 100%);
+        border-left: 3px solid var(--color-accent);
+        border-radius: 4px;
+      }
+
+      .meta-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+
+      .meta-label {
+        font-size: 0.75rem;
+        color: var(--color-text-muted);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 600;
+      }
+
+      .meta-value {
+        font-size: 1rem;
+        color: var(--color-text-secondary);
+        font-weight: 500;
+      }
+
+      .status-badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        border-radius: 12px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        text-transform: capitalize;
+      }
+
+      .status-completed {
+        background: rgba(0, 255, 100, 0.15);
+        color: #00ff64;
+        border: 1px solid rgba(0, 255, 100, 0.3);
+      }
+
+      .status-in-progress {
+        background: rgba(255, 200, 0, 0.15);
+        color: #ffc800;
+        border: 1px solid rgba(255, 200, 0, 0.3);
+      }
+
+      .status-archived {
+        background: rgba(128, 128, 128, 0.15);
+        color: #a0a0a0;
+        border: 1px solid rgba(128, 128, 128, 0.3);
+      }
+
+      .technologies {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .tech-tag {
+        padding: 0.4rem 0.875rem;
+        background: rgba(0, 217, 255, 0.1);
+        border: 1px solid var(--color-border-dim);
+        border-radius: 4px;
+        color: var(--color-text-secondary);
+        font-size: 0.875rem;
+        transition: all 0.3s ease;
+      }
+
+      .tech-tag:hover {
+        background: rgba(0, 217, 255, 0.2);
+        border-color: var(--color-primary);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 217, 255, 0.3);
+      }
+
+      .project-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin: 2rem 0;
+      }
+
+      .project-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        background: transparent;
+        border: 2px solid var(--color-primary);
+        border-radius: 4px;
+        color: var(--color-primary);
+        text-decoration: none;
+        font-weight: bold;
+        transition: all 0.3s ease;
+      }
+
+      .project-link:hover {
+        background: rgba(0, 217, 255, 0.1);
+        box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+        transform: translateY(-2px);
+      }
+
+      .project-content {
+        margin-top: 2rem;
+      }
+
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 3rem;
+        padding: 0.75rem 1.5rem;
+        background: rgba(0, 217, 255, 0.05);
+        border: 1px solid var(--color-border-dim);
+        border-radius: 4px;
+        color: var(--color-primary);
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .back-link:hover {
+        background: rgba(0, 217, 255, 0.1);
+        border-color: var(--color-primary);
+      }
+
+      @media (max-width: 768px) {
+        .project-title {
+          font-size: 1.75rem;
+        }
+
+        .project-meta {
+          flex-direction: column;
+        }
+
+        .project-links {
+          flex-direction: column;
+        }
+
+        .project-link {
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <ArwesBackground client:load />
+    <div style="position: relative; z-index: 1;">
+      <Header />
+      <main>
+        <article class="project-header">
+          <h1 class="project-title">{project.data.title}</h1>
+          <p style="font-size: 1.2rem; color: var(--color-text-body);">
+            {project.data.description}
+          </p>
+
+          <div class="project-meta">
+            <div class="meta-item">
+              <span class="meta-label">Category</span>
+              <span class="meta-value">{project.data.category}</span>
+            </div>
+
+            <div class="meta-item">
+              <span class="meta-label">Status</span>
+              <span class={`status-badge status-${project.data.status}`}>
+                {project.data.status}
+              </span>
+            </div>
+
+            <div class="meta-item">
+              <span class="meta-label">Timeline</span>
+              <span class="meta-value">
+                {project.data.startDate}
+                {project.data.endDate && (
+                  <> - {project.data.endDate}</>
+                )}
+                {!project.data.endDate && project.data.status === 'in-progress' && (
+                  <> - Present</>
+                )}
+              </span>
+            </div>
+          </div>
+
+          {project.data.technologies && project.data.technologies.length > 0 && (
+            <div style="margin-top: 1.5rem;">
+              <h3 style="font-size: 1rem; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.75rem;">
+                Technologies Used
+              </h3>
+              <div class="technologies">
+                {project.data.technologies.map((tech) => (
+                  <span class="tech-tag">{tech}</span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div class="project-links">
+            {project.data.liveUrl && (
+              <a href={project.data.liveUrl} target="_blank" rel="noopener" class="project-link">
+                🌐 View Live Site
+              </a>
+            )}
+            {project.data.githubUrl && (
+              <a href={project.data.githubUrl} target="_blank" rel="noopener" class="project-link">
+                💻 View on GitHub
+              </a>
+            )}
+            {project.data.demoUrl && (
+              <a href={project.data.demoUrl} target="_blank" rel="noopener" class="project-link">
+                🎥 Watch Demo
+              </a>
+            )}
+          </div>
+        </article>
+
+        <div class="project-content prose">
+          <Content />
+        </div>
+
+        <a href="/projects" class="back-link">
+          ← Back to Projects
+        </a>
+      </main>
+      <Footer />
+    </div>
+  </body>
+</html>
