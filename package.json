@@ -18,6 +18,7 @@
     "@astrojs/rss": "^4.0.13",
     "@astrojs/sitemap": "^3.6.0",
     "astro": "^5.15.1",
+    "astro-feelback": "^0.3.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "sharp": "^0.34.3"
