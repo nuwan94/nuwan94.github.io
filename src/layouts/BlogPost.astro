@@ -9,6 +9,7 @@ import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 import Header from "../components/Header.astro";
 import TagsDisplay from "../components/TagsDisplay.astro";
+import SocialShare from "../components/SocialShare.astro";
 
 import "astro-feelback/styles/feelback.css";
 
@@ -78,6 +79,7 @@ const {
               <hr class="title-divider" />
             </div>
             <slot />
+            <SocialShare title={title} description={description} />
             <hr class="title-divider" />
             <div class="feelback-section">
               Like this post? Show some love:
