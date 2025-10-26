@@ -191,6 +191,12 @@ img {
 }
 
 /* Prose content styling with Arwes theme */
+.blog-post-main h1,
+.blog-post-main h2,
+.blog-post-main h3,
+.blog-post-main h4,
+.blog-post-main h5,
+.blog-post-main h6,
 .prose h1,
 .prose h2,
 .prose h3,
@@ -204,42 +210,52 @@ img {
   text-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
 }
 
+.blog-post-main h1,
 .prose h1 {
   font-size: 3.052em;
 }
 
+.blog-post-main h2,
 .prose h2 {
   font-size: 2.441em;
 }
 
+.blog-post-main h3,
 .prose h3 {
   font-size: 1.953em;
 }
 
+.blog-post-main h4,
 .prose h4 {
   font-size: 1.563em;
 }
 
+.blog-post-main h5,
 .prose h5 {
   font-size: 1.25em;
 }
 
+.blog-post-main p,
 .prose p {
   margin-bottom: 2em;
   color: var(--color-text-body);
 }
 
+.blog-post-main a,
 .prose a {
   color: var(--color-primary);
   text-decoration: none;
   transition: all var(--duration-fast) ease;
 }
 
+.blog-post-main a:hover,
 .prose a:hover {
   color: var(--color-accent);
   text-shadow: 0 0 8px rgba(0, 217, 255, 0.6);
 }
 
+.blog-post-main strong,
+.blog-post-main b,
 .prose strong,
 .prose b {
   font-weight: 700;
@@ -256,7 +272,7 @@ img {
   box-shadow: inset 0 0 10px rgba(0, 217, 255, 0.1);
 }
 
-.prose code {
+.blog-post-main code, .prose code {
   padding: 2px 5px;
   background-color: var(--color-bg-tertiary);
   border-radius: 2px;
@@ -265,24 +281,26 @@ img {
   font-family: var(--font-family-mono);
 }
 
-.prose pre {
-  padding: 1.5em;
-  border-radius: 8px;
+.blog-post-main pre, .prose pre {
+  padding: 0.5em;
+  border-radius: 6px;
+  border: 1px solid var(--color-border-dim);
 }
 
-.prose pre code {
+.blog-post-main pre code, .prose pre code {
   all: unset;
 }
 
-.prose img {
+.blog-post-main img, .prose img {
   max-width: 100%;
   height: auto;
   border-radius: 8px;
 }
 
-.prose hr {
+.blog-post-main hr, .prose hr {
   border: none;
-  border-top: 1px solid var(--color-brand-gray-light);
+  margin: 2rem 0;
+  border-bottom: 2px solid var(--color-border-dim);
 }
 
 /* Job Banner Styles */
