@@ -35,10 +35,6 @@ In the registration desk, organizers can quickly scan participant QR codes to re
 - QR code scanning functionality for quick participant check-in
 - User-friendly interface for easy navigation and information retrieval
 
-### Happiness Meter
-- Real-time feedback system using Socket.io to gauge participant satisfaction during the event
-- Visual representation of happiness levels displayed on the organizer dashboard
-
 ### Deployment
 - Hosted on the my laptop via Node.js server exposing the application to the local network
 - Secured with basic authentication for organizer access (password protected)
@@ -46,5 +42,8 @@ In the registration desk, organizers can quickly scan participant QR codes to re
 ## Fun Easter Egg 🥚
 
 If you look closely at the screenshots in the [GitHub repository](https://github.com/nuwan94/qr-registration-system), you'll notice something special about the team member names - they're characters from the HBO series "Silicon Valley"! The demo data features the Pied Piper team including Richard, Erlich,  Gilfoyle, Dinesh, and Jared. 
+
+![Silicon Valley Team](https://github.com/nuwan94/qr-registration-system/raw/master/Screenshots/1.jpg)
+![Silicon Valley Team](https://github.com/nuwan94/qr-registration-system/raw/master/Screenshots/4.jpg)
 
 A little tribute to one of the best tech comedies ever made! 🙌
