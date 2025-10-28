@@ -30,7 +30,7 @@ const JobBanner: React.FC = () => {
               <span className="contact-icon">📧</span>
               <span className="contact-text">nuwansalawatta@gmail.com</span>
             </a>
-            <a href="tel:+94757871494" className="contact-method">
+            <a href="https://wa.me/94757871494" className="contact-method" target="_blank" rel="noopener noreferrer">
               <span className="contact-icon">📱</span>
               <span className="contact-text">+94 757871494</span>
               <span className="contact-hint">(WhatsApp)</span>

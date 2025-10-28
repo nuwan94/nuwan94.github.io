@@ -523,39 +523,92 @@ img {
 }
 
 @media (max-width: 768px) {
+  .job-banner {
+    margin: 1.5rem 0 2rem 0;
+  }
+
   .job-banner-header {
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1rem;
     text-align: center;
-    padding-bottom: 1.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
   }
 
   .job-banner-status {
     justify-content: center;
-    padding: 0.75rem 0;
+    padding: 0.5rem 0;
+    width: 100%;
+  }
+
+  .status-text {
+    font-size: 0.8rem;
+    letter-spacing: 1px;
   }
 
   .job-banner-icon {
-    font-size: 2.25rem;
+    font-size: 2rem;
+    order: -1;
   }
 
   .job-banner-body {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+    padding: 0 0.5rem;
   }
 
   .job-banner-title {
-    font-size: 1.65rem;
+    font-size: 1.4rem;
     text-align: center;
+  }
+
+  .job-banner-description {
+    font-size: 0.95rem;
+    text-align: center;
+    margin-bottom: 1rem;
   }
 
   .job-banner-badges {
     justify-content: center;
-    gap: 0.875rem;
+    gap: 0.5rem;
   }
 
   .badge {
-    font-size: 0.875rem;
-    padding: 0.625rem 1rem;
+    font-size: 0.8rem;
+    padding: 0.5rem 0.75rem;
+    flex: 1 1 auto;
+    min-width: fit-content;
+    justify-content: center;
+  }
+
+  .job-banner-footer {
+    padding-top: 1rem;
+  }
+
+  .contact-methods {
+    gap: 0.75rem;
+  }
+
+  .contact-method {
+    padding: 0.875rem;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.625rem;
+  }
+
+  .contact-icon {
+    font-size: 1.15rem;
+    width: 24px;
+  }
+
+  .contact-text {
+    font-size: 0.85rem;
+    word-break: break-word;
+  }
+
+  .contact-hint {
+    font-size: 0.75rem;
+    padding: 0.15rem 0.5rem;
+    margin-left: auto;
   }
 
   .job-banner-countries {
@@ -579,24 +632,61 @@ img {
   .contact-label {
     text-align: center;
   }
+}
 
-  .contact-method {
-    padding: 1rem;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.75rem;
+/* Extra small mobile devices */
+@media (max-width: 480px) {
+  .job-banner {
+    margin: 1rem 0 1.5rem 0;
   }
 
-  .contact-icon {
-    width: auto;
+  .job-banner-header {
+    padding: 0.875rem;
+  }
+
+  .status-text {
+    font-size: 0.7rem;
+    letter-spacing: 0.5px;
+  }
+
+  .job-banner-icon {
+    font-size: 1.75rem;
+  }
+
+  .job-banner-body {
+    padding: 0 0.25rem;
+  }
+
+  .job-banner-description {
+    font-size: 0.9rem;
+  }
+
+  .job-banner-badges {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .badge {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.8rem;
+    padding: 0.625rem;
+  }
+
+  .contact-method {
+    padding: 0.75rem;
+    flex-wrap: wrap;
   }
 
   .contact-text {
-    font-size: 0.95rem;
+    font-size: 0.8rem;
+    flex: 1 1 100%;
+    text-align: left;
   }
 
   .contact-hint {
-    align-self: flex-start;
-    margin-left: 0;
+    flex-basis: 100%;
+    margin-left: 32px;
+    margin-top: 0.25rem;
   }
 }
