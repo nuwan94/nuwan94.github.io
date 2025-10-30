@@ -6,29 +6,36 @@ import Footer from '../../../components/Footer.astro';
 import FormattedDate from '../../../components/FormattedDate.astro';
 import Header from '../../../components/Header.astro';
 import ArwesBackground from '../../../components/ArwesBackground';
+import Pagination from '../../../components/Pagination.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../../consts';
 
-export async function getStaticPaths() {
+export async function getStaticPaths({ paginate }: any) {
 	const posts = await getCollection('blog');
 	const tags = [...new Set(posts.flatMap(post => post.data.tags))] as string[];
 	
-	return tags.map((tag) => ({
-		params: { tag: tag.toLowerCase().replace(/\s+/g, '-') },
-		props: { tag, posts }
-	}));
+	return tags.flatMap((tag) => {
+		const tagPosts = posts.filter(post => 
+			post.data.tags.includes(tag)
+		).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+		
+		return paginate(tagPosts, {
+			params: { tag: tag.toLowerCase().replace(/\s+/g, '-') },
+			props: { tagName: tag },
+			pageSize: 6
+		});
+	});
 }
 
-const { tag, posts } = Astro.props;
-const tagName = tag as string;
-const filteredPosts = (posts as any[]).filter(post => 
-	post.data.tags.includes(tagName)
-).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const { page, tagName }: any = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={`"${tagName}" Tag - ${SITE_TITLE}`} description={`${SITE_DESCRIPTION} - Articles tagged with "${tagName}"`} />
+		<BaseHead 
+			title={page.currentPage === 1 ? `"${tagName}" Tag - ${SITE_TITLE}` : `"${tagName}" Tag - Page ${page.currentPage} - ${SITE_TITLE}`} 
+			description={`${SITE_DESCRIPTION} - Articles tagged with "${tagName}"`} 
+		/>
 	</head>
 	<body>
 		<ArwesBackground client:load />
@@ -44,8 +51,8 @@ const filteredPosts = (posts as any[]).filter(post =>
 					<span class="tag-hash">#</span>{tagName}
 				</div>
 				<p class="hero-description">
-					{filteredPosts.length} article{filteredPosts.length !== 1 ? 's' : ''} found with this tag.
-					Explore related content and insights.
+					{page.total} article{page.total !== 1 ? 's' : ''} found with this tag.
+					{page.currentPage > 1 && <span> - Page {page.currentPage}</span>}
 				</p>
 				<div class="hero-divider"></div>
 			</section>
@@ -61,10 +68,11 @@ const filteredPosts = (posts as any[]).filter(post =>
 
 			<!-- Articles Grid -->
 			<section class="articles-section">
-				{filteredPosts.length > 0 ? (
-					<div class="articles-grid">
-						{
-							filteredPosts.map((post) => (
+				{page.data.length > 0 ? (
+					<>
+						<div class="articles-grid">
+							{
+								page.data.map((post: any) => (
 								<article class="article-card">
 									<div class="card-border-top"></div>
 									<a href={`/articles/${post.id}/`} class="card-link">
@@ -121,7 +129,11 @@ const filteredPosts = (posts as any[]).filter(post =>
 								</article>
 							))
 						}
-					</div>
+						</div>
+						
+						<!-- Pagination -->
+						<Pagination page={page} baseUrl={`/articles/tag/${tagName.toLowerCase().replace(/\s+/g, '-')}`} />
+					</>
 				) : (
 					<div class="empty-state">
 						<div class="empty-icon">🏷️</div>

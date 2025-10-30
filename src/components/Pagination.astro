@@ -1,0 +1,158 @@
+---
+export interface Props {
+  page: {
+    currentPage: number;
+    lastPage: number;
+    size: number;
+    total: number;
+    url: {
+      prev?: string;
+      next?: string;
+    };
+  };
+  baseUrl?: string;
+}
+
+const { page, baseUrl = "/articles" } = Astro.props;
+---
+
+{(page.lastPage > 1) && (
+  <nav class="pagination" aria-label="Pagination">
+    <div class="pagination-info">
+      <span>
+        Showing {((page.currentPage - 1) * page.size) + 1} - {Math.min(page.currentPage * page.size, page.total)} of {page.total} articles
+      </span>
+    </div>
+    
+    <div class="pagination-controls">
+      {page.url.prev && (
+        <a href={page.url.prev} class="pagination-link pagination-prev">
+          <span class="arrow-left">←</span> Previous
+        </a>
+      )}
+      
+      <div class="pagination-numbers">
+        {Array.from({ length: page.lastPage }, (_, i) => i + 1).map(pageNum => (
+          <a 
+            href={`${baseUrl}/page/${pageNum}/`}
+            class:list={[
+              'pagination-number',
+              { 'current': pageNum === page.currentPage }
+            ]}
+          >
+            {pageNum}
+          </a>
+        ))}
+      </div>
+      
+      {page.url.next && (
+        <a href={page.url.next} class="pagination-link pagination-next">
+          Next <span class="arrow-right">→</span>
+        </a>
+      )}
+    </div>
+  </nav>
+)}
+
+<style>
+  .pagination {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border-dim);
+  }
+
+  .pagination-info {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+  }
+
+  .pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .pagination-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    border: 1px solid var(--color-border-dim);
+    border-radius: 4px;
+    color: var(--color-text-primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  .pagination-link:hover {
+    background: rgba(0, 217, 255, 0.1);
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+  }
+
+  .pagination-numbers {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .pagination-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: transparent;
+    border: 1px solid var(--color-border-dim);
+    border-radius: 4px;
+    color: var(--color-text-primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  .pagination-number:hover {
+    background: rgba(0, 217, 255, 0.1);
+    border-color: var(--color-primary);
+  }
+
+  .pagination-number.current {
+    background: var(--color-primary);
+    color: var(--color-bg-primary);
+    border-color: var(--color-primary);
+  }
+
+  .arrow-left,
+  .arrow-right {
+    transition: transform 0.3s ease;
+  }
+
+  .pagination-prev:hover .arrow-left {
+    transform: translateX(-2px);
+  }
+
+  .pagination-next:hover .arrow-right {
+    transform: translateX(2px);
+  }
+
+  /* Responsive pagination */
+  @media (max-width: 768px) {
+    .pagination-controls {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .pagination-numbers {
+      order: -1;
+    }
+
+    .pagination-link {
+      padding: 1rem 2rem;
+    }
+  }
+</style>
