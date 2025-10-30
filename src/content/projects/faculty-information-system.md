@@ -15,6 +15,8 @@ technologies:
     "Javascript",
     "jQuery",
   ]
+
+liveUrl: https://nsa94.epizy.com/?i=1
 ---
 
 ## Overview

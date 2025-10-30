@@ -15,7 +15,7 @@ technologies:
     "Git",
     "Trello",
   ]
-liveUrl: "https://www.youtube.com/watch?v=nVgZRikLzM4"
+demoUrl: "https://www.youtube.com/watch?v=nVgZRikLzM4"
 ---
 
 ## Overview

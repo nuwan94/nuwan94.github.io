@@ -7,6 +7,7 @@ featured: false
 startDate: "August 2018"
 endDate: "September 2018"
 githubUrl: "https://github.com/nuwan94/qr-registration-system"
+liveUrl: "https://nuwan.dev/realhack18-web/"
 technologies: ["Javascript", "jQuery", "Node.js", "Express.js", "Socket.io", "MySQL", "PHP", "HTML", "CSS", "Android Studio", "Java"]
 ---
 
