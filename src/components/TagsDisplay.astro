@@ -12,7 +12,7 @@ const { tags } = Astro.props;
 			<div class="tags-list">
 				{tags.map((tag) => (
 					<a
-						href={`/articles/tag/${tag.toLowerCase().replace(/\s+/g, '-')}`}
+						href={`/articles/tag/${tag.toLowerCase().replace(/\s+/g, '-')}/1/`}
 						class="tag-link"
 					>
 						<span class="tag-hash">#</span>{tag}

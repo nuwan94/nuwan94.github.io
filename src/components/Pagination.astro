@@ -11,9 +11,11 @@ export interface Props {
     };
   };
   baseUrl?: string;
+  pageBase?: string; // segment name to insert between baseUrl and page number (e.g. 'page'). If empty, use direct /<baseUrl>/<num>/
 }
 
 const { page, baseUrl = "/articles" } = Astro.props;
+const { pageBase = 'page' } = Astro.props as any;
 ---
 
 {(page.lastPage > 1) && (
@@ -34,7 +36,7 @@ const { page, baseUrl = "/articles" } = Astro.props;
       <div class="pagination-numbers">
         {Array.from({ length: page.lastPage }, (_, i) => i + 1).map(pageNum => (
           <a 
-            href={`${baseUrl}/page/${pageNum}/`}
+            href={pageBase ? `${baseUrl}/${pageBase}/${pageNum}/` : `${baseUrl}/${pageNum}/`}
             class:list={[
               'pagination-number',
               { 'current': pageNum === page.currentPage }

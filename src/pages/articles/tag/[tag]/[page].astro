@@ -75,7 +75,7 @@ const { page, tagName }: any = Astro.props;
                                 page.data.map((post: any) => (
                                 <article class="article-card">
                                     <div class="card-border-top"></div>
-                                    <a href={`/articles/${post.id}/`} class="card-link">
+                                        <a href={`/articles/${post.id}/`} class="card-link" rel="prefetch">
                                         {post.data.heroImage && (
                                             <div class="card-image-wrapper">
                                                 <Image
@@ -132,7 +132,7 @@ const { page, tagName }: any = Astro.props;
                         </div>
                         
                         <!-- Pagination -->
-                        <Pagination page={page} baseUrl={`/articles/tag/${tagName.toLowerCase().replace(/\s+/g, '-')}`} />
+                        <Pagination page={page} baseUrl={`/articles/tag/${tagName.toLowerCase().replace(/\s+/g, '-')}`} pageBase="" />
                     </>
                 ) : (
                     <div class="empty-state">

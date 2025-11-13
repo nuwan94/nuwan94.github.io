@@ -122,7 +122,7 @@ const { page, tagName }: any = Astro.props;
 						</div>
 						
 						<!-- Pagination -->
-						<Pagination page={page} baseUrl={`/articles/tag/${tagName.toLowerCase().replace(/\s+/g, '-')}`} />
+						<Pagination page={page} baseUrl={`/articles/tag/${tagName.toLowerCase().replace(/\s+/g, '-')}`} pageBase="" />
 					</>
 				) : (
 					<div class="empty-state">
