@@ -9,21 +9,11 @@ import ArwesBackground from '../../../components/ArwesBackground';
 import Pagination from '../../../components/Pagination.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../../consts';
 
-export async function getStaticPaths({ paginate }: any) {
-	const posts = await getCollection('blog');
-	const tags = [...new Set(posts.flatMap(post => post.data.tags))] as string[];
-	
-	return tags.flatMap((tag) => {
-		const tagPosts = posts.filter(post => 
-			post.data.tags.includes(tag)
-		).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-		
-		return paginate(tagPosts, {
-			params: { tag: tag.toLowerCase().replace(/\s+/g, '-') },
-			props: { tagName: tag },
-			pageSize: 6
-		});
-	});
+export async function getStaticPaths() {
+	// This file was previously used for tag pages, but pagination now uses
+	// the nested route at `src/pages/articles/tag/[tag]/[page].astro`.
+	// Return no paths here to avoid duplicate/contradictory routes.
+	return [];
 }
 
 const { page, tagName }: any = Astro.props;

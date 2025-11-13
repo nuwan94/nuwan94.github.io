@@ -1,0 +1,519 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import BaseHead from '../../../../components/BaseHead.astro';
+import Footer from '../../../../components/Footer.astro';
+import FormattedDate from '../../../../components/FormattedDate.astro';
+import Header from '../../../../components/Header.astro';
+import ArwesBackground from '../../../../components/ArwesBackground';
+import Pagination from '../../../../components/Pagination.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../../../../consts';
+
+export async function getStaticPaths({ paginate }: any) {
+    const posts = await getCollection('blog');
+    const tags = [...new Set(posts.flatMap(post => post.data.tags))] as string[];
+    
+    return tags.flatMap((tag) => {
+        const tagPosts = posts.filter(post => 
+            post.data.tags.includes(tag)
+        ).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+        
+        return paginate(tagPosts, {
+            params: { tag: tag.toLowerCase().replace(/\s+/g, '-') },
+            props: { tagName: tag },
+            pageSize: 6
+        });
+    });
+}
+
+const { page, tagName }: any = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead 
+            title={page.currentPage === 1 ? `"${tagName}" Tag - ${SITE_TITLE}` : `"${tagName}" Tag - Page ${page.currentPage} - ${SITE_TITLE}`} 
+            description={`${SITE_DESCRIPTION} - Articles tagged with "${tagName}"`} 
+        />
+    </head>
+    <body>
+        <ArwesBackground client:load />
+        <div style="position: relative; z-index: 1;">
+            <Header />
+            <main class="articles-main">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <h1 class="hero-title">
+                    <span class="title-bracket">&gt;&gt;</span> Articles tagged with
+                </h1>
+                <div class="tag-badge-large">
+                    <span class="tag-hash">#</span>{tagName}
+                </div>
+                <p class="hero-description">
+                    {page.total} article{page.total !== 1 ? 's' : ''} found with this tag.
+                    {page.currentPage > 1 && <span> - Page {page.currentPage}</span>}
+                </p>
+                <div class="hero-divider"></div>
+            </section>
+
+            <!-- Breadcrumb -->
+            <section class="breadcrumb-section">
+                <nav class="breadcrumb-nav">
+                    <a href="/articles" class="breadcrumb-link">All Articles</a>
+                    <span class="breadcrumb-separator">›</span>
+                    <span class="breadcrumb-current"><span class="tag-hash">#</span>{tagName}</span>
+                </nav>
+            </section>
+
+            <!-- Articles Grid -->
+            <section class="articles-section">
+                {page.data.length > 0 ? (
+                    <>
+                        <div class="articles-grid">
+                            {
+                                page.data.map((post: any) => (
+                                <article class="article-card">
+                                    <div class="card-border-top"></div>
+                                    <a href={`/articles/${post.id}/`} class="card-link">
+                                        {post.data.heroImage && (
+                                            <div class="card-image-wrapper">
+                                                <Image
+                                                    width={720}
+                                                    height={360}
+                                                    src={post.data.heroImage}
+                                                    alt={post.data.title}
+                                                    class="card-image"
+                                                />
+                                                <div class="image-overlay"></div>
+                                            </div>
+                                        )}
+                                        <div class="card-content">
+                                            <div class="card-body">
+                                                <h3 class="card-title">
+                                                    <span class="title-arrow">&gt;</span> {post.data.title}
+                                                </h3>
+                                                <p class="card-description">
+                                                    {post.data.description}
+                                                </p>
+                                            </div>
+
+                                            {post.data.tags && post.data.tags.length > 0 && (
+                                                <div class="card-tags">
+                                                    {post.data.tags.slice(0, 3).map((tagItem: string) => (
+                                                        <span class="tag-badge">
+                                                            <span class="tag-hash">#</span>{tagItem}
+                                                        </span>
+                                                    ))}
+                                                    {post.data.tags.length > 3 && (
+                                                        <span class="tag-more">
+                                                            +{post.data.tags.length - 3}
+                                                        </span>
+                                                    )}
+                                                </div>
+                                            )}
+
+                                            <div class="card-separator"></div>
+
+                                            <div class="card-footer">
+                                                <time class="card-date" datetime={post.data.pubDate.toISOString()}>
+                                                    <FormattedDate date={post.data.pubDate} />
+                                                </time>
+                                                <span class="read-more">
+                                                    Read more <span class="arrow">→</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="card-border-bottom"></div>
+                                </article>
+                            ))
+                        }
+                        </div>
+                        
+                        <!-- Pagination -->
+                        <Pagination page={page} baseUrl={`/articles/tag/${tagName.toLowerCase().replace(/\s+/g, '-')}`} />
+                    </>
+                ) : (
+                    <div class="empty-state">
+                        <div class="empty-icon">🏷️</div>
+                        <h3 class="empty-title">No articles found</h3>
+                        <p class="empty-description">There are no articles tagged with "<span class="tag-hash">#</span>{tagName}" yet.</p>
+                        <a href="/articles" class="empty-button">
+                            Browse All Articles
+                        </a>
+                    </div>
+                )}
+            </section>
+        </main>
+        <Footer />
+        </div>
+    </body>
+</html>
+
+<style>
+    .articles-main {
+        width: 100%;
+        padding: 3rem 0;
+    }
+
+    .hero-section {
+        text-align: center;
+        margin-bottom: 2rem;
+        padding: 0 1rem;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: var(--color-text-primary);
+        margin-bottom: 1.5rem;
+        text-shadow: 0 0 15px rgba(0, 217, 255, 0.5);
+    }
+
+    .title-bracket {
+        color: var(--color-accent);
+        margin-right: 0.5rem;
+    }
+
+    @media (min-width: 768px) {
+        .hero-title {
+            font-size: 3rem;
+        }
+    }
+
+    .tag-badge-large {
+        display: inline-block;
+        padding: 0.5rem 1.5rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--color-text-secondary);
+        background: rgba(0, 217, 255, 0.15);
+        border: 1px solid var(--color-border);
+        border-radius: 9999px;
+        margin-bottom: 1rem;
+        font-family: var(--font-family-mono);
+        box-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
+    }
+
+    .tag-hash {
+        color: var(--color-accent);
+    }
+
+    .hero-description {
+        font-size: 1.125rem;
+        color: var(--color-text-body);
+        max-width: 48rem;
+        margin: 0 auto;
+        line-height: 1.75;
+    }
+
+    .hero-divider {
+        width: 6rem;
+        height: 2px;
+        background: linear-gradient(
+            90deg,
+            transparent 0%,
+            var(--color-primary) 50%,
+            transparent 100%
+        );
+        margin: 2rem auto 0;
+        border-radius: 9999px;
+    }
+
+    .breadcrumb-section {
+        margin-bottom: 2rem;
+        padding: 0 1rem;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .breadcrumb-nav {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.875rem;
+        color: var(--color-text-secondary);
+    }
+
+    .breadcrumb-link {
+        color: var(--color-text-secondary);
+        text-decoration: none;
+        transition: all var(--duration-fast) ease;
+    }
+
+    .breadcrumb-link:hover {
+        color: var(--color-accent);
+        text-shadow: 0 0 8px rgba(0, 217, 255, 0.6);
+    }
+
+    .breadcrumb-separator {
+        color: var(--color-text-muted);
+    }
+
+    .breadcrumb-current {
+        color: var(--color-accent);
+        font-weight: 500;
+    }
+
+    .articles-section {
+        padding: 0 1rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .articles-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+
+    @media (max-width: 768px) {
+        .articles-grid {
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+    }
+
+    .article-card {
+        position: relative;
+        background: var(--color-bg-secondary);
+        border: 1px solid var(--color-border-dim);
+        border-radius: 8px;
+        overflow: hidden;
+        transition: all var(--duration-normal) ease;
+    }
+
+    .article-card:hover {
+        transform: translateY(-8px);
+        border-color: var(--color-border);
+        box-shadow: 0 0 30px rgba(0, 217, 255, 0.4);
+    }
+
+    .card-border-top,
+    .card-border-bottom {
+        height: 2px;
+        background: linear-gradient(
+            90deg,
+            transparent 0%,
+            var(--color-primary) 50%,
+            transparent 100%
+        );
+        opacity: 0.6;
+    }
+
+    .article-card:hover .card-border-top,
+    .article-card:hover .card-border-bottom {
+        opacity: 1;
+        animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% {
+            opacity: 0.6;
+        }
+        50% {
+            opacity: 1;
+        }
+    }
+
+    .card-link {
+        display: block;
+        height: 100%;
+        text-decoration: none;
+    }
+
+    .card-image-wrapper {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .card-image {
+        width: 100%;
+        height: 12rem;
+        object-fit: cover;
+        transition: transform var(--duration-normal) ease;
+    }
+
+    .article-card:hover .card-image {
+        transform: scale(1.05);
+    }
+
+    .image-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(2, 17, 20, 0.8), transparent);
+        opacity: 0;
+        transition: opacity var(--duration-normal) ease;
+    }
+
+    .article-card:hover .image-overlay {
+        opacity: 1;
+    }
+
+    .card-content {
+        padding: 1.5rem;
+    }
+
+    .card-body {
+        margin-bottom: 1rem;
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: var(--color-text-primary);
+        margin-bottom: 0.75rem;
+        line-height: 1.4;
+        transition: all var(--duration-fast) ease;
+    }
+
+    .title-arrow {
+        color: var(--color-accent);
+        margin-right: 0.5rem;
+        opacity: 0;
+        transition: opacity var(--duration-normal) ease;
+    }
+
+    .article-card:hover .title-arrow {
+        opacity: 1;
+    }
+
+    .article-card:hover .card-title {
+        color: var(--color-accent);
+        text-shadow: 0 0 10px rgba(0, 255, 252, 0.6);
+    }
+
+    .card-description {
+        color: var(--color-text-body);
+        font-size: 0.875rem;
+        line-height: 1.75;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .card-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .tag-badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: var(--color-text-secondary);
+        background: rgba(0, 217, 255, 0.1);
+        border: 1px solid var(--color-border-dim);
+        border-radius: 9999px;
+        font-family: var(--font-family-mono);
+        transition: all var(--duration-fast) ease;
+    }
+
+    .tag-badge:hover {
+        background: rgba(0, 217, 255, 0.2);
+        border-color: var(--color-border);
+    }
+
+    .tag-more {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: var(--color-text-muted);
+        background: rgba(0, 217, 255, 0.05);
+        border-radius: 9999px;
+    }
+
+    .card-separator {
+        height: 1px;
+        background: linear-gradient(
+            90deg,
+            transparent 0%,
+            var(--color-border-dim) 50%,
+            transparent 100%
+        );
+        margin: 1rem 0;
+    }
+
+    .card-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 0.875rem;
+    }
+
+    .card-date {
+        color: var(--color-text-secondary);
+        font-weight: 500;
+        font-family: var(--font-family-mono);
+    }
+
+    .read-more {
+        color: var(--color-accent);
+        font-weight: 500;
+        transition: all var(--duration-normal) ease;
+    }
+
+    .article-card:hover .read-more {
+        color: var(--color-primary);
+        text-shadow: 0 0 8px rgba(0, 217, 255, 0.6);
+    }
+
+    .arrow {
+        display: inline-block;
+        transition: transform var(--duration-normal) ease;
+    }
+
+    .article-card:hover .arrow {
+        transform: translateX(4px);
+    }
+
+    /* Empty state */
+    .empty-state {
+        text-align: center;
+        padding: 4rem 1rem;
+    }
+
+    .empty-icon {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        filter: drop-shadow(0 0 10px rgba(0, 217, 255, 0.3));
+    }
+
+    .empty-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--color-text-primary);
+        margin-bottom: 1rem;
+        text-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
+    }
+
+    .empty-description {
+        color: var(--color-text-body);
+        margin-bottom: 2rem;
+    }
+
+    .empty-button {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        background: var(--color-primary);
+        color: var(--color-bg-primary);
+        border-radius: 8px;
+        font-weight: 500;
+        text-decoration: none;
+        border: 1px solid var(--color-border);
+        transition: all var(--duration-normal) ease;
+    }
+
+    .empty-button:hover {
+        background: var(--color-accent);
+        box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+        transform: translateY(-2px);
+    }
+</style>
