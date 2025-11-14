@@ -4,7 +4,7 @@ description: "A comprehensive approach to automating the software development li
 category: "DevOps"
 status: "completed"
 featured: true
-startDate: "January 2021"
+startDate: "January 2023"
 endDate: "December 2023"
 technologies:
   [
