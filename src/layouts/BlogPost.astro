@@ -15,7 +15,10 @@ import "astro-feelback/styles/feelback.css";
 
 const CONTENT_SET_LIKES = "096adebe-eee8-417f-954f-02205c155596";
 
-type Props = CollectionEntry<"blog">["data"];
+type Props = CollectionEntry<"blog">["data"] & {
+  prevPost?: CollectionEntry<"blog"> | null;
+  nextPost?: CollectionEntry<"blog"> | null;
+};
 
 const {
   title,
@@ -24,6 +27,8 @@ const {
   updatedDate,
   heroImage,
   tags = [],
+  prevPost,
+  nextPost,
 } = Astro.props;
 ---
 
@@ -42,6 +47,29 @@ const {
     <ArwesBackground client:load />
     <div style="position: relative; z-index: 1;">
       <Header />
+      
+      <!-- Sticky Navigation Buttons -->
+      <div class="sticky-nav">
+        {prevPost && (
+          <a 
+            href={`/articles/${prevPost.id}/`} 
+            class="nav-btn prev-btn"
+          >
+            <span class="nav-icon">←</span>
+            <span class="nav-label">Previous</span>
+          </a>
+        )}
+        {nextPost && (
+          <a 
+            href={`/articles/${nextPost.id}/`} 
+            class="nav-btn next-btn"
+          >
+            <span class="nav-label">Next</span>
+            <span class="nav-icon">→</span>
+          </a>
+        )}
+      </div>
+
       <main class="blog-post-main">
         <article>
           <div class="hero-image">
@@ -177,5 +205,100 @@ const {
       transparent 100%
     );
     margin: 2rem 0;
+  }
+
+  /* Sticky Navigation */
+  .sticky-nav {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: 40;
+    pointer-events: none;
+    padding: 0 1rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .nav-btn {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border-dim);
+    border-radius: 8px;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: all var(--duration-normal) ease;
+    pointer-events: auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .prev-btn {
+    left: 0;
+  }
+
+  .next-btn {
+    right: 0;
+  }
+
+  .nav-btn:hover {
+    border-color: var(--color-primary);
+    background: var(--color-bg-tertiary);
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
+    transform: translateX(0);
+  }
+
+  .prev-btn:hover {
+    transform: translateX(-4px);
+  }
+
+  .next-btn:hover {
+    transform: translateX(4px);
+  }
+
+  .nav-icon {
+    font-size: 1.25rem;
+    color: var(--color-accent);
+    transition: all var(--duration-normal) ease;
+  }
+
+  .nav-btn:hover .nav-icon {
+    color: var(--color-primary);
+    text-shadow: 0 0 10px rgba(0, 217, 255, 0.6);
+  }
+
+  .nav-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Hide on small screens */
+  @media (max-width: 1024px) {
+    .sticky-nav {
+      display: none;
+    }
+  }
+
+  /* Adjust for medium screens */
+  @media (max-width: 1200px) {
+    .nav-btn {
+      padding: 0.5rem 0.75rem;
+    }
+    
+    .nav-label {
+      display: none;
+    }
+    
+    .nav-icon {
+      font-size: 1.5rem;
+    }
   }
 </style>
