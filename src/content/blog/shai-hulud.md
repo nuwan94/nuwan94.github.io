@@ -6,9 +6,9 @@ tags: ["npm", "Security", "JavaScript", "Web Development", "Package Management",
 heroImage: "../assets/shai-hulud.jpg"
 ---
 
-When you build JavaScript apps, you rely heavily on packages from the registry called npm. This registry hosts more than 2 million packages — tools that make development faster. But like the deep sands of software supply chain, danger can hide beneath the surface.
+When you build JavaScript apps, you rely heavily on packages from the registry called npm. This registry hosts more than 2 million packages tools that make development faster. But like the deep sands of software supply chain, danger can hide beneath the surface.
 
-In this article, we’ll explore NPM supply chain attacks, explained like giant sandworm strikes from the Dune world — beginner friendly, practical, and easy to understand.
+In this article, we’ll explore NPM supply chain attacks, explained like giant sandworm strikes from the Dune world beginner friendly, practical, and easy to understand.
 
 ## 🏜️ What is a Supply Chain Attack in NPM?
 
@@ -39,7 +39,7 @@ Developers might install the fake one by mistake, inviting the worm to strike!
 
 A good package gets hijacked by attackers and updated with malware.
 
-This happened to famous tools like build helpers and crypto libraries in the past — trusted, until the worm woke up.
+This happened to famous tools like build helpers and crypto libraries in the past trusted, until the worm woke up.
 
 ### Malicious Update Worm
 
@@ -50,15 +50,14 @@ Even without hacking the whole package, attackers contribute a dangerous update 
 If you install a bad NPM package, it might:
 
 Danger	What it Means
-🔑 Steal environment variables	Can grab API keys, database passwords
-💰 Mine crypto	Slows down computers and servers
-🕵️ Spy or log data	Can track users or network activity
-🚪 Open backdoors	Gives attacker remote access
-🔥 Break code or deploy malware	Can sabotage production
+🔑 Steal environment variables - Can grab API keys, database passwords
+💰 Mine crypto - Slows down computers and servers
+🕵️ Spy or log data - Can track users or network activity
+🚪 Open backdoors - Gives attacker remote access
+🔥 Break code or deploy malware - Can sabotage production
+Unlike normal bugs, these are intentional attacks silent, planned, and harmful.
 
-Unlike normal bugs, these are intentional attacks — silent, planned, and harmful.
-
-## 🚀 The Fremen Way: How to Survive NPM Worm Attacks
+![Fremen Survival](../assets/shai-hulud-fremen-way.jpg)
 
 The desert tribe of Fremen survived giant worms using smart rules.
 You can do the same in NPM:
@@ -107,7 +106,7 @@ NPM offers a `verified badge` for trusted publishers. Install from trusted sourc
 
 ---
 
-## 🏛️ Even the Atreides Had Close Calls…
+![House Atreides](../assets/shai-hulud-atreides.jpg)
 
 Powerful teams still rely on dependencies from npm, like how House Atreides trusted their harvesters in Arrakis. But without understanding the desert rules, even trusted tools and pipelines can fall into danger.
 
@@ -143,3 +142,5 @@ Supply chain attacks are stealthy like Shai-Hulud, but you can survive by:
 The desert rule for beginners?
 
 > The registry gives. The registry can take. Install wisely.
+
+> Stay alert, and may your code remain safe from the lurking worms!
