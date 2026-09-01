@@ -1,6 +1,6 @@
 import GradientWaves from '@/components/GradientWaves';
 import BorderGlow from '@/components/BorderGlow';
-import { CheckIcon, GlobeIcon, CloudIcon, TeamIcon } from './icons';
+import { CheckIcon, GlobeIcon } from './icons';
 import { StatCounter } from './StatCounter';
 
 const achievements = [

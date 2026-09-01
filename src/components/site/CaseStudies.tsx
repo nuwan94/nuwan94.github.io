@@ -2,7 +2,7 @@ const projects = [
   {
     stat: '200+',
     statLabel: 'warehouses',
-    tag: 'Sysco LABS · 4 years, ongoing',
+    tag: 'Sysco LABS',
     headline: 'SWMS Modernization',
     description:
       'Migrating a legacy Oracle Forms-based Warehouse Management System to Java and React, serving thousands of users across 200+ large-scale warehouses worldwide — managing inventory, orders, returns, and reporting.',
@@ -11,7 +11,7 @@ const projects = [
   },
   {
     stat: '80%',
-    statLabel: 'faster dev',
+    statLabel: 'Developer Experience Improvement',
     tag: 'Sysco LABS',
     headline: 'SWMS Core UI',
     description:
