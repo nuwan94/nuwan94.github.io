@@ -25,6 +25,8 @@ export const techIcons = {
   typescript: devicon('typescript/typescript-original'),
   javascript: devicon('javascript/javascript-original'),
   nextjs: devicon('nextjs/nextjs-original'),
+  nodejs: devicon('nodejs/nodejs-original'),
+  express: devicon('express/express-original'),
   tailwindcss: devicon('tailwindcss/tailwindcss-original'),
   html5: devicon('html5/html5-original'),
   css3: devicon('css3/css3-original'),
@@ -39,6 +41,18 @@ export const techIcons = {
   jenkins: devicon('jenkins/jenkins-original'),
   git: devicon('git/git-original'),
   datadog: devicon('datadog/datadog-original'),
+  oracle: devicon('oracle/oracle-original'),
+  kotlin: devicon('kotlin/kotlin-original'),
+  angular: devicon('angular/angular-original'),
+  kubernetes: devicon('kubernetes/kubernetes-plain'),
+  vercel: devicon('vercel/vercel-original'),
+  cloudflare: devicon('cloudflare/cloudflare-original'),
+  grafana: devicon('grafana/grafana-original'),
+  kafka: devicon('apachekafka/apachekafka-original'),
+  php: devicon('php/php-original'),
+  apollographql: devicon('apollographql/apollographql-original'),
+  circleci: devicon('circleci/circleci-plain'),
+  antdesign: devicon('antdesign/antdesign-original'),
 
   // AI & agent tooling — Simple Icons
   claude: simpleIcon('claude', 'D97757'),
@@ -50,6 +64,55 @@ export const techIcons = {
 } as const;
 
 export type TechIconName = keyof typeof techIcons;
+
+// Human-readable label per icon — used for tooltips/aria-labels anywhere a
+// TechIconName is displayed without its own hand-written caption.
+export const techLabels: Record<TechIconName, string> = {
+  java: 'Java',
+  springBoot: 'Spring Boot',
+  hibernate: 'JPA / Hibernate',
+  apacheKafka: 'Apache Kafka',
+  graphql: 'GraphQL',
+  react: 'React',
+  redux: 'Redux',
+  typescript: 'TypeScript',
+  javascript: 'JavaScript',
+  nextjs: 'Next.js',
+  nodejs: 'Node.js',
+  express: 'Express',
+  tailwindcss: 'Tailwind CSS',
+  html5: 'HTML5',
+  css3: 'CSS3',
+  jest: 'Jest',
+  postgresql: 'PostgreSQL',
+  mysql: 'MySQL',
+  redis: 'Redis',
+  aws: 'AWS',
+  docker: 'Docker',
+  terraform: 'Terraform',
+  githubActions: 'GitHub Actions',
+  jenkins: 'Jenkins',
+  git: 'Git',
+  datadog: 'DataDog',
+  oracle: 'Oracle',
+  kotlin: 'Kotlin',
+  angular: 'Angular',
+  kubernetes: 'Kubernetes',
+  vercel: 'Vercel',
+  cloudflare: 'Cloudflare',
+  grafana: 'Grafana',
+  kafka: 'Kafka',
+  php: 'PHP',
+  apollographql: 'Apollo GraphQL',
+  circleci: 'CircleCI',
+  antdesign: 'Ant Design',
+  claude: 'Claude',
+  cursor: 'Cursor',
+  githubCopilot: 'GitHub Copilot',
+  modelContextProtocol: 'MCP',
+  lmStudio: 'LM Studio',
+  ollama: 'Ollama',
+};
 
 export function TechIcon({ name, size = 16, className }: { name: TechIconName; size?: number; className?: string }) {
   return (

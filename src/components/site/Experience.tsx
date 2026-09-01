@@ -1,4 +1,13 @@
-const roles = [
+import { TechIconTooltip, techLabels, type TechIconName } from './tech-icons';
+
+const roles: {
+  role: string;
+  company: string;
+  location: string;
+  period: string;
+  bullets: string[];
+  stack: TechIconName[];
+}[] = [
   {
     role: 'Software Engineer',
     company: 'Cut+Dry Inc',
@@ -8,6 +17,7 @@ const roles = [
       'Re-architecting core application workflows and microservices to optimize structure and minimize tech debt.',
       'Refactoring backend API contracts using Spring Boot and JPA for performance and maintainability.',
     ],
+    stack: ['java', 'springBoot', 'hibernate', 'react', 'graphql', 'apollographql', 'php', 'circleci', 'aws'],
   },
   {
     role: 'Associate Technical Lead',
@@ -19,6 +29,7 @@ const roles = [
       'Implemented CI/CD pipelines with Jenkins, Docker, GitHub Actions, and Terraform — cutting deployment errors by 90% and release cycles by 50%.',
       'Mentored 3–4 engineers on clean API integration patterns, RBAC enforcement, and enterprise React practices.',
     ],
+    stack: ['aws', 'react', 'typescript', 'springBoot', 'kubernetes', 'docker', 'terraform'],
   },
   {
     role: 'Senior Software Engineer',
@@ -30,6 +41,7 @@ const roles = [
       'Optimized complex SQL queries in PostgreSQL/Oracle, cutting heavy task execution from minutes to under 30 seconds.',
       'Built shared React component libraries, reducing frontend development timelines by 80%.',
     ],
+    stack: ['react', 'redux', 'javascript', 'typescript', 'java', 'springBoot', 'hibernate', 'aws', 'jenkins', 'docker', 'githubActions', 'terraform'],
   },
   {
     role: 'Software Engineer',
@@ -40,6 +52,7 @@ const roles = [
       'Engineered responsive React frontends connected to secure Spring Boot REST APIs during legacy system migrations.',
       'Improved reliability through optimized state management, error handling, and SQL query tuning.',
     ],
+    stack: ['react', 'redux', 'javascript', 'springBoot', 'hibernate', 'oracle'],
   },
   {
     role: 'Trainee Associate Software Engineer',
@@ -49,6 +62,7 @@ const roles = [
     bullets: [
       'Built an internal code-quality dashboard (Spring Boot, Kotlin, Angular, PostgreSQL), reducing unresolved code smells by 50% in three months.',
     ],
+    stack: ['springBoot', 'kotlin', 'angular', 'postgresql', 'nodejs', 'express'],
   },
 ];
 
@@ -73,7 +87,7 @@ export function Experience() {
                 boxShadow: `0 0 12px ${i === 0 ? 'rgba(91,141,255,0.4)' : 'rgba(178,92,255,0.3)'}`,
               }}
             />
-            <div className="flex flex-1 flex-col gap-2">
+            <div className="relative flex flex-1 flex-col gap-2">
               <div className="flex flex-wrap items-baseline justify-between gap-2">
                 <h3 className="font-heading text-lg font-semibold">
                   {r.role} <span className="text-muted-foreground">&middot; {r.company}</span>
@@ -89,6 +103,11 @@ export function Experience() {
                   </li>
                 ))}
               </ul>
+              <div className="flex flex-wrap items-center gap-2 pt-1">
+                {r.stack.map((name) => (
+                  <TechIconTooltip key={name} name={name} label={techLabels[name]} size={18} />
+                ))}
+              </div>
             </div>
           </div>
         ))}
