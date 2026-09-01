@@ -131,6 +131,37 @@ export function SparkleIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
+export function GraduationCapIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M2 8.5 12 4l10 4.5-10 4.5-10-4.5z" />
+      <path d="M6 10.7v4.3c0 1.4 2.7 2.8 6 2.8s6-1.4 6-2.8v-4.3" />
+      <path d="M20 9v5.5" />
+    </svg>
+  );
+}
+
+export function BriefcaseIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <rect x="3" y="7.5" width="18" height="12" rx="2" />
+      <path d="M8.5 7.5V6a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v1.5" />
+      <path d="M3 12.5h18" />
+    </svg>
+  );
+}
+
+export function RocketIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M12 2.5c2.8 1.4 4.5 4.3 4.5 8 0 2.4-.7 4.6-1.8 6.3l-2.7 3-2.7-3C8.2 15.1 7.5 12.9 7.5 10.5c0-3.7 1.7-6.6 4.5-8z" />
+      <circle cx="12" cy="10" r="1.8" />
+      <path d="M8.3 15.5 5.5 17c-.3 1.4-.3 2.8 0 4.2 1.4.3 2.8.3 4.2 0l1.5-2.8" />
+      <path d="M15.7 15.5 18.5 17c.3 1.4.3 2.8 0 4.2-1.4.3-2.8.3-4.2 0l-1.5-2.8" />
+    </svg>
+  );
+}
+
 export function ArrowRightIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg {...base} {...props}>
