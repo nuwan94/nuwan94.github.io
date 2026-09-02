@@ -53,6 +53,7 @@ export const techIcons = {
   apollographql: devicon('apollographql/apollographql-original'),
   circleci: devicon('circleci/circleci-plain'),
   antdesign: devicon('antdesign/antdesign-original'),
+  socketio: devicon('socketio/socketio-original'),
 
   // AI & agent tooling — Simple Icons
   claude: simpleIcon('claude', 'D97757'),
@@ -106,6 +107,7 @@ export const techLabels: Record<TechIconName, string> = {
   apollographql: 'Apollo GraphQL',
   circleci: 'CircleCI',
   antdesign: 'Ant Design',
+  socketio: 'Socket.IO',
   claude: 'Claude',
   cursor: 'Cursor',
   githubCopilot: 'GitHub Copilot',

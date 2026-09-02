@@ -1,10 +1,11 @@
+import { useNavigate, useLocation } from 'react-router-dom';
 import { GlobeIcon, MailIcon, ChatIcon } from './icons';
 
 const navLinks = [
-  { href: '#about', label: 'About' },
-  { href: '#skills', label: 'Skills' },
-  { href: '#experience', label: 'Experience' },
-  { href: '#projects', label: 'Projects' },
+  { id: 'about', label: 'About' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'projects', label: 'Projects' },
 ];
 
 const socials = [
@@ -14,6 +15,17 @@ const socials = [
 ];
 
 export function Footer() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const goToSection = (id: string) => {
+    if (location.pathname === '/') {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      navigate('/', { state: { scrollTo: id } });
+    }
+  };
+
   return (
     <footer className="border-t border-border px-6 pb-10 pt-16 md:px-10">
       <div className="mx-auto flex max-w-7xl flex-col gap-12">
@@ -46,10 +58,14 @@ export function Footer() {
             <span className="mb-1 text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground/70">
               Navigate
             </span>
-            {navLinks.map(l => (
-              <a key={l.label} href={l.href} className="text-muted-foreground hover:text-foreground">
+            {navLinks.map((l) => (
+              <button
+                key={l.label}
+                onClick={() => goToSection(l.id)}
+                className="text-left text-muted-foreground hover:text-foreground"
+              >
                 {l.label}
-              </a>
+              </button>
             ))}
           </div>
         </div>

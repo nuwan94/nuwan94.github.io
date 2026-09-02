@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import LineSidebar from '@/components/LineSidebar';
 
 const items = ['About', 'Skills', 'Experience', 'Projects', 'Contact'];
@@ -6,6 +7,8 @@ const ids = ['about', 'skills', 'experience', 'projects', 'contact'];
 
 export function Navbar() {
   const [visible, setVisible] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const hero = document.getElementById('hero');
@@ -17,6 +20,14 @@ export function Navbar() {
     observer.observe(hero);
     return () => observer.disconnect();
   }, []);
+
+  const goToSection = (id: string) => {
+    if (location.pathname === '/') {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      navigate('/', { state: { scrollTo: id } });
+    }
+  };
 
   return (
     <>
@@ -40,23 +51,20 @@ export function Navbar() {
               maxShift={18}
               itemGap={22}
               fontSize={0.95}
-              onItemClick={(_, label) => {
-                const id = ids[items.indexOf(label)];
-                document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              }}
+              onItemClick={(_, label) => goToSection(ids[items.indexOf(label)])}
             />
           </div>
         </div>
       </div>
 
-      <a
-        href="#hero"
+      <button
+        onClick={() => goToSection('hero')}
         className={`fixed left-6 top-6 z-50 flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-cosmic-blue to-cosmic-purple font-heading text-xs font-bold text-white shadow-[0_8px_24px_-8px_rgba(178,92,255,0.4)] transition-all duration-500 ease-out ${
           visible ? 'opacity-100 translate-x-0' : 'pointer-events-none -translate-x-3 opacity-0'
         }`}
       >
         NA
-      </a>
+      </button>
     </>
   );
 }
