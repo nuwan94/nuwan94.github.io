@@ -1,7 +1,7 @@
 import { SparkleIcon, CodeIcon, GlobeIcon, GraduationCapIcon, BriefcaseIcon, RocketIcon } from './icons';
 
 const journey = [
-  { icon: SparkleIcon, title: 'Caught the bug at 12', subtitle: 'Gaming sparked an obsession with how computers work' },
+  { icon: SparkleIcon, title: 'Caught the bug at 12', subtitle: 'Curiosity about how computers worked turned into an obsession' },
   { icon: CodeIcon, title: 'Self-taught', subtitle: 'Learned VB6, HTML, and PHP on my own' },
   { icon: GlobeIcon, title: 'Freelancing', subtitle: 'Took on early client work on Fiverr' },
   { icon: GraduationCapIcon, title: 'University of Kelaniya', subtitle: 'B.Sc. (Hons) Software Engineering — First Class' },
@@ -18,14 +18,14 @@ export function About() {
             About
           </span>
           <h2 className="font-heading text-2xl font-semibold leading-snug md:text-[32px]">
-            A lifelong love for computers — from <span className="grad-text">gaming at 12</span> to shipping
+            A lifelong love for computers — from <span className="grad-text">curious kid</span> to shipping
             software today.
           </h2>
           <p className="max-w-xl text-muted-foreground">
-            What started as curiosity about how games worked turned into teaching myself VB6, HTML, and PHP, then
-            freelancing on Fiverr to build real things for real clients. A formal software engineering degree
-            sharpened the fundamentals — and the years since, at one of Sri Lanka's top tech companies and now a
-            fast-moving startup, have only deepened it. I'm genuinely happy with the path I've taken.
+            Long before it was a career, it was a hobby I couldn't put down — self-taught VB6, HTML, and PHP, then
+            freelance projects on Fiverr just to keep building. A software engineering degree gave that hobby
+            structure, and the years since — at one of Sri Lanka's top tech companies, and now a fast-moving
+            startup — have made it a career I love. I'm genuinely happy with the path I've taken.
           </p>
         </div>
 
