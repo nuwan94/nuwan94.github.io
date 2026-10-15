@@ -4,6 +4,7 @@ import swmsVideo from '@/assets/swms-video.mp4';
 import coreUiVideo from '@/assets/coreui-video.mp4';
 import planningPokerVideo from '@/assets/planning-poker-video.mp4';
 import hotelPmsVideo from '@/assets/hotel-pms-video.mp4';
+import ratesVideo from '@/assets/rates-video.mp4';
 
 export type Project = {
   stat: string;
@@ -16,6 +17,15 @@ export type Project = {
   video?: string;
   link?: string;
 };
+
+// Label for a project's external link: repos are "View on GitHub", everything
+// else is a live demo.
+export const linkLabel = (url: string) =>
+  new URL(url).hostname === 'github.com' ? 'View on GitHub' : 'See demo';
+
+// How many projects (from the top of the list) are shown on the home page.
+// Everything after this is only on /projects.
+export const HOME_PROJECT_LIMIT = 3;
 
 export const projects: Project[] = [
   {
@@ -74,5 +84,17 @@ export const projects: Project[] = [
     from: 'from-cosmic-purple/22 to-cosmic-blue/16',
     video: planningPokerVideo,
     link: 'https://github.com/nuwan94/planning-poker',
+  },
+  {
+    stat: '30 min',
+    statLabel: 'Auto-refresh cycle',
+    tag: 'Side Project',
+    headline: 'Sri Lanka Bank Rates',
+    description:
+      'A live comparison of exchange rates across Sri Lankan banks. Python scrapers run on a GitHub Actions schedule every 30 minutes and commit the latest rates, feeding a React dashboard that highlights the best USD buying rate, per-bank trend arrows, and a zoomable historical chart.',
+    tech: ['python', 'githubActions', 'react', 'vite', 'chartjs', 'tailwindcss'],
+    from: 'from-cosmic-blue/22 to-cosmic-purple/16',
+    video: ratesVideo,
+    link: 'https://rates.nuwan.dev',
   },
 ];

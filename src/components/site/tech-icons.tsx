@@ -54,6 +54,11 @@ export const techIcons = {
   circleci: devicon('circleci/circleci-plain'),
   antdesign: devicon('antdesign/antdesign-original'),
   socketio: devicon('socketio/socketio-original'),
+  python: devicon('python/python-original'),
+  vite: devicon('vitejs/vitejs-original'),
+
+  // Charting — Simple Icons
+  chartjs: simpleIcon('chartdotjs', 'FF6384'),
 
   // AI & agent tooling — Simple Icons
   claude: simpleIcon('claude', 'D97757'),
@@ -108,6 +113,9 @@ export const techLabels: Record<TechIconName, string> = {
   circleci: 'CircleCI',
   antdesign: 'Ant Design',
   socketio: 'Socket.IO',
+  python: 'Python',
+  vite: 'Vite',
+  chartjs: 'Chart.js',
   claude: 'Claude',
   cursor: 'Cursor',
   githubCopilot: 'GitHub Copilot',

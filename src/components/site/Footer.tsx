@@ -1,17 +1,11 @@
 import { useNavigate, useLocation } from 'react-router-dom';
-import { GlobeIcon, MailIcon, ChatIcon } from './icons';
+import { contactLinks, isExternal } from '@/data/links';
 
 const navLinks = [
   { id: 'about', label: 'About' },
   { id: 'skills', label: 'Skills' },
   { id: 'experience', label: 'Experience' },
   { id: 'projects', label: 'Projects' },
-];
-
-const socials = [
-  { href: 'https://nuwan.dev', label: 'nuwan.dev', Icon: GlobeIcon },
-  { href: 'https://github.com/nuwan94', label: 'GitHub', Icon: ChatIcon },
-  { href: 'mailto:nuwansalawatta@gmail.com', label: 'Email', Icon: MailIcon },
 ];
 
 export function Footer() {
@@ -39,12 +33,12 @@ export function Footer() {
               Full-Stack Software Engineer — Java, Spring Boot, React, and AWS. Open to full-time roles in Singapore.
             </p>
             <div className="mt-1.5 flex gap-2.5">
-              {socials.map(({ href, label, Icon }) => (
+              {contactLinks.map(({ href, label, Icon }) => (
                 <a
                   key={label}
                   href={href}
-                  target={href.startsWith('http') ? '_blank' : undefined}
-                  rel={href.startsWith('http') ? 'noreferrer' : undefined}
+                  target={isExternal(href) ? '_blank' : undefined}
+                  rel={isExternal(href) ? 'noreferrer' : undefined}
                   aria-label={label}
                   className="flex h-[34px] w-[34px] items-center justify-center rounded-lg border border-border text-muted-foreground transition-colors hover:border-cosmic-blue/60 hover:text-foreground"
                 >

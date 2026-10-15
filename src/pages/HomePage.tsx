@@ -9,6 +9,7 @@ import { Experience } from '@/components/site/Experience';
 import { CaseStudies } from '@/components/site/CaseStudies';
 import { Cta } from '@/components/site/Cta';
 import { Footer } from '@/components/site/Footer';
+import { HOME_PROJECT_LIMIT } from '@/data/projects';
 
 export function HomePage() {
   const location = useLocation();
@@ -32,7 +33,7 @@ export function HomePage() {
         <About />
         <Skills />
         <Experience />
-        <CaseStudies limit={3} />
+        <CaseStudies limit={HOME_PROJECT_LIMIT} />
         <Cta />
       </main>
       <Footer />

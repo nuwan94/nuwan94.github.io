@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import BorderGlow from '@/components/BorderGlow';
+import { contactLinks, isExternal } from '@/data/links';
 
 export function Cta() {
   const [submitted, setSubmitted] = useState(false);
@@ -21,15 +22,17 @@ export function Cta() {
           message below.
         </p>
         <div className="mt-2 flex flex-col gap-2 text-sm text-muted-foreground">
-          <a href="mailto:nuwansalawatta@gmail.com" className="text-cosmic-blue hover:text-cosmic-purple">
-            nuwansalawatta@gmail.com
-          </a>
-          <a href="https://linkedin.com/in/nsa94" target="_blank" rel="noreferrer" className="text-cosmic-blue hover:text-cosmic-purple">
-            linkedin.com/in/nsa94
-          </a>
-          <a href="https://github.com/nuwan94" target="_blank" rel="noreferrer" className="text-cosmic-blue hover:text-cosmic-purple">
-            github.com/nuwan94
-          </a>
+          {contactLinks.map(({ label, href, display }) => (
+            <a
+              key={label}
+              href={href}
+              target={isExternal(href) ? '_blank' : undefined}
+              rel={isExternal(href) ? 'noreferrer' : undefined}
+              className="text-cosmic-blue hover:text-cosmic-purple"
+            >
+              {display}
+            </a>
+          ))}
         </div>
       </div>
 

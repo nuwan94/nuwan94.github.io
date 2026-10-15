@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { projects } from '@/data/projects';
+import { projects, linkLabel } from '@/data/projects';
 import { TechIconTooltip, techLabels } from './tech-icons';
 import { ArrowRightIcon } from './icons';
 
@@ -59,6 +59,17 @@ export function CaseStudies({ limit, standalone }: { limit?: number; standalone?
                   <TechIconTooltip key={name} name={name} label={techLabels[name]} size={20} />
                 ))}
               </div>
+              {p.link && (
+                <a
+                  href={p.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 self-start text-sm font-bold text-cosmic-blue transition-colors hover:text-cosmic-purple"
+                >
+                  {linkLabel(p.link)}
+                  <ArrowRightIcon width={14} height={14} className="-rotate-45" />
+                </a>
+              )}
             </div>
           </div>
         ))}

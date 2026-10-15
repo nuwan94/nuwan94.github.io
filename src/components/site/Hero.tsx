@@ -1,72 +1,15 @@
-import { useEffect, useState } from 'react';
 import GradientWaves from '@/components/GradientWaves';
-import BorderGlow from '@/components/BorderGlow';
 import { CheckIcon, GlobeIcon } from './icons';
 import { StatCounter } from './StatCounter';
-import { TechIcon } from './tech-icons';
-
-const terminalTabs = [
-  {
-    file: 'stack.json',
-    content: (
-      <>
-        <div><span className="text-cosmic-blue">"role"</span>: <span className="text-muted-foreground">"Full-Stack Engineer"</span>,</div>
-        <div><span className="text-cosmic-blue">"backend"</span>: [<span className="text-cosmic-purple">"Java"</span>, <span className="text-cosmic-purple">"Spring Boot"</span>, <span className="text-cosmic-purple">"JPA"</span>],</div>
-        <div><span className="text-cosmic-blue">"frontend"</span>: [<span className="text-cosmic-purple">"React"</span>, <span className="text-cosmic-purple">"Redux"</span>, <span className="text-cosmic-purple">"TypeScript"</span>],</div>
-        <div><span className="text-cosmic-blue">"cloud"</span>: [<span className="text-cosmic-purple">"AWS"</span>, <span className="text-cosmic-purple">"Docker"</span>, <span className="text-cosmic-purple">"Terraform"</span>],</div>
-        <div><span className="text-cosmic-blue">"status"</span>: <span className="text-muted-foreground">"open to work"</span></div>
-      </>
-    ),
-  },
-  {
-    file: 'hire-me.json',
-    content: (
-      <>
-        <div><span className="text-cosmic-blue">"noticePeriod"</span>: <span className="text-muted-foreground">"1 week"</span>,</div>
-        <div><span className="text-cosmic-blue">"credentials"</span>: <span className="text-muted-foreground">"MOM-verified degree (SG)"</span>,</div>
-        <div className="flex flex-wrap items-center gap-x-1.5">
-          <span className="text-cosmic-blue">"coreStack"</span>:<span>[</span>
-          <TechIcon name="java" size={16} />
-          <TechIcon name="react" size={16} />
-          <TechIcon name="nodejs" size={16} />
-          <span>],</span>
-        </div>
-        <div><span className="text-cosmic-blue">"adaptability"</span>: <span className="text-muted-foreground">"fast ramp-up on any stack"</span>,</div>
-        <div><span className="text-cosmic-blue">"status"</span>: <span className="text-muted-foreground">"ready to start immediately"</span></div>
-      </>
-    ),
-  },
-];
+import { FeaturedProject } from './FeaturedProject';
+import { contactLinks, isExternal } from '@/data/links';
 
 const achievements = [
-  {
-    icon: CheckIcon,
-    title: 'First Class Honours',
-    subtitle: 'B.Sc. in Software Engineering',
-    position: 'bottom-0 left-[20px]',
-    duration: '4s',
-    delay: '0s',
-    hideOnMobile: false,
-  },
-  {
-    icon: GlobeIcon,
-    title: 'Fortune 100 Experience',
-    subtitle: "Sysco - World's largest food-service provider",
-    position: 'bottom-0 right-[20px]',
-    duration: '5s',
-    delay: '0.6s',
-    hideOnMobile: false,
-  },
+  { icon: CheckIcon, title: 'First Class Honours', subtitle: 'B.Sc. in Software Engineering' },
+  { icon: GlobeIcon, title: 'Fortune 100 Experience', subtitle: "Sysco - World's largest food-service provider" },
 ] as const;
 
 export function Hero() {
-  const [activeTab, setActiveTab] = useState(0);
-
-  useEffect(() => {
-    const id = setInterval(() => setActiveTab((t) => (t + 1) % terminalTabs.length), 5000);
-    return () => clearInterval(id);
-  }, []);
-
   return (
     <section id="hero" className="relative isolate overflow-hidden">
       <div className="absolute inset-0 -z-10">
@@ -118,73 +61,50 @@ export function Hero() {
               View Projects
             </a>
           </div>
+          <div className="flex flex-wrap gap-2.5">
+            {contactLinks.map(({ label, href, Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target={isExternal(href) ? '_blank' : undefined}
+                rel={isExternal(href) ? 'noreferrer' : undefined}
+                className="inline-flex items-center gap-2 rounded-lg border border-border bg-white/[0.03] px-3.5 py-2 text-sm font-semibold text-muted-foreground transition-colors hover:border-cosmic-blue/60 hover:text-foreground"
+              >
+                <Icon width={16} height={16} className="text-cosmic-blue" />
+                {label}
+              </a>
+            ))}
+          </div>
           <div className="flex gap-8 pt-4">
             <StatCounter target={5} label="Years Experience" />
             <StatCounter target={10} label="Enterprise Projects Delivered" />
           </div>
         </div>
 
-        <div className="relative h-[440px]">
+        <div className="relative flex flex-col gap-4">
           <div className="absolute right-0 top-4 h-44 w-44 animate-[spin_11s_linear_infinite] rounded-full">
             <div className="absolute inset-0 rounded-full border border-dashed border-border" />
             <div className="absolute -top-1 left-1/2 h-2 w-2 -translate-x-1/2 rounded-full bg-cosmic-blue shadow-[0_0_14px_4px_rgba(91,141,255,0.35)]" />
           </div>
 
-          <div className="absolute inset-x-0 top-5 bottom-16">
-            <BorderGlow
-              backgroundColor="#0d0f1c"
-              borderRadius={17}
-              glowColor="265 90% 70%"
-              colors={['#5b8dff', '#b25cff', '#5b8dff']}
-              animated
-              glowIntensity={1.1}
-              className="h-full w-full"
-            >
-              <div className="flex h-full flex-col overflow-hidden">
-                <div className="flex items-center gap-2 border-b border-border px-4 py-2.5">
-                  <span className="h-2 w-2 rounded-full bg-[#3d3f57]" />
-                  <span className="h-2 w-2 rounded-full bg-[#3d3f57]" />
-                  <span className="h-2 w-2 rounded-full bg-[#3d3f57]" />
-                  <div className="ml-2 flex items-center gap-1">
-                    {terminalTabs.map((t, idx) => (
-                      <button
-                        key={t.file}
-                        onClick={() => setActiveTab(idx)}
-                        className={`rounded-md px-2.5 py-1 font-mono text-xs transition-colors ${
-                          idx === activeTab ? 'bg-white/[0.06] text-foreground' : 'text-muted-foreground hover:text-foreground/70'
-                        }`}
-                      >
-                        {t.file}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-                <div
-                  key={activeTab}
-                  className="flex flex-1 flex-col gap-4 p-6 font-mono text-[13px] leading-relaxed"
-                  style={{ animation: 'fadeSlideIn 0.45s ease-out' }}
-                >
-                  {terminalTabs[activeTab].content}
-                </div>
-              </div>
-            </BorderGlow>
+          {/* Swap in <HeroTerminal /> here to bring the terminal back. */}
+          <div className="relative h-[370px]">
+            <FeaturedProject />
           </div>
 
-          {achievements.map(({ icon: Icon, title, subtitle, position, duration, delay, hideOnMobile }) => (
-            <div
-              key={title}
-              className={`absolute z-10 ${hideOnMobile ? 'hidden md:flex' : 'flex'} max-w-[220px] items-center gap-3 rounded-2xl border border-border bg-card px-5 py-4 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.7)] ${position}`}
-              style={{ animation: `floaty ${duration} ease-in-out infinite`, animationDelay: delay }}
-            >
-              <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-[9px] bg-gradient-to-br from-cosmic-blue to-cosmic-purple">
-                <Icon width={18} height={18} stroke="#fff" strokeWidth={2.2} />
+          <div className="relative grid gap-3 sm:grid-cols-2">
+            {achievements.map(({ icon: Icon, title, subtitle }) => (
+              <div key={title} className="flex items-center gap-3 rounded-2xl border border-border bg-card px-4 py-3.5">
+                <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-[9px] bg-gradient-to-br from-cosmic-blue to-cosmic-purple">
+                  <Icon width={18} height={18} stroke="#fff" strokeWidth={2.2} />
+                </div>
+                <div>
+                  <div className="font-heading text-base font-bold leading-tight">{title}</div>
+                  <div className="text-xs text-muted-foreground">{subtitle}</div>
+                </div>
               </div>
-              <div>
-                <div className="font-heading text-base font-bold leading-tight">{title}</div>
-                <div className="text-xs text-muted-foreground">{subtitle}</div>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
