@@ -25,7 +25,10 @@ export function FeaturedProject() {
       colors={['#5b8dff', '#b25cff', '#5b8dff']}
       animated
       glowIntensity={1.1}
-      className="h-full w-full"
+      // BorderGlow's inner wrapper is overflow:auto, which flashes a scrollbar
+      // while the card's fade-in slide briefly overflows it. Its stylesheet is
+      // unlayered, so a plain Tailwind utility can't override it: needs `!`.
+      className="h-full w-full [&_.border-glow-inner]:overflow-hidden!"
     >
       <div className="relative h-full">
         <div
