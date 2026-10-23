@@ -41,11 +41,17 @@ export function FeaturedProject() {
             {p.video && (
               <video className="absolute inset-0 h-full w-full object-cover" src={p.video} autoPlay muted loop playsInline />
             )}
-            <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/10 to-transparent" />
-            <div className="absolute bottom-4 left-5 flex flex-col gap-1">
-              <span className="grad-text font-heading text-3xl font-bold leading-none">{p.stat}</span>
-              <span className="text-xs uppercase tracking-[0.1em] text-muted-foreground">{p.statLabel}</span>
-            </div>
+            {p.image && <img className="absolute inset-0 h-full w-full object-cover" src={p.image} alt={`${p.headline} preview`} />}
+            {/* A cover image already carries its own text, so skip the stat overlay. */}
+            {!p.image && (
+              <>
+                <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/10 to-transparent" />
+                <div className="absolute bottom-4 left-5 flex flex-col gap-1">
+                  <span className="grad-text font-heading text-3xl font-bold leading-none">{p.stat}</span>
+                  <span className="text-xs uppercase tracking-[0.1em] text-muted-foreground">{p.statLabel}</span>
+                </div>
+              </>
+            )}
           </div>
 
           <div className="flex flex-col gap-2.5 p-5">

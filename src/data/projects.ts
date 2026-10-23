@@ -5,6 +5,7 @@ import coreUiVideo from '@/assets/coreui-video.mp4';
 import planningPokerVideo from '@/assets/planning-poker-video.mp4';
 import hotelPmsVideo from '@/assets/hotel-pms-video.mp4';
 import ratesVideo from '@/assets/rates-video.mp4';
+import devtoolsCover from '@/assets/devtools-cover.png';
 
 export type Project = {
   stat: string;
@@ -15,6 +16,7 @@ export type Project = {
   tech: TechIconName[];
   from: string;
   video?: string;
+  image?: string;
   link?: string;
 };
 
@@ -96,5 +98,17 @@ export const projects: Project[] = [
     from: 'from-cosmic-blue/22 to-cosmic-purple/16',
     video: ratesVideo,
     link: 'https://rates.nuwan.dev',
+  },
+  {
+    stat: '24',
+    statLabel: 'Tools, all in the browser',
+    tag: 'Side Project',
+    headline: 'Bytebox Dev Tools',
+    description:
+      'A playful collection of small developer tools that run entirely in the browser, so nothing you paste is uploaded: JSON formatter, Base64, UUID, regex tester, JWT reader, text diff, SQL formatter, QR codes, and more.',
+    tech: ['nextjs', 'react', 'typescript'],
+    from: 'from-cosmic-purple/22 to-cosmic-blue/16',
+    image: devtoolsCover,
+    link: 'https://devtools.nuwan.dev',
   },
 ];

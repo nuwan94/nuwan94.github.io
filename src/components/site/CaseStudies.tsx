@@ -32,15 +32,21 @@ export function CaseStudies({ limit, standalone }: { limit?: number; standalone?
                   playsInline
                 />
               )}
-              <div
-                className={`absolute inset-0 opacity-50 ${p.video ? 'mix-blend-overlay' : ''}`}
-                style={{ backgroundImage: 'radial-gradient(rgba(255,255,255,0.09) 1px, transparent 1px)', backgroundSize: '22px 22px' }}
-              />
-              {p.video && <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/10 to-transparent" />}
-              <div className="absolute bottom-6 left-7 flex flex-col gap-1">
-                <span className="grad-text font-heading text-4xl font-bold leading-none">{p.stat}</span>
-                <span className="text-xs uppercase tracking-[0.1em] text-muted-foreground">{p.statLabel}</span>
-              </div>
+              {p.image && <img className="absolute inset-0 h-full w-full object-cover" src={p.image} alt={`${p.headline} preview`} />}
+              {/* A cover image already carries its own text, so skip the stat overlay. */}
+              {!p.image && (
+                <>
+                  <div
+                    className={`absolute inset-0 opacity-50 ${p.video ? 'mix-blend-overlay' : ''}`}
+                    style={{ backgroundImage: 'radial-gradient(rgba(255,255,255,0.09) 1px, transparent 1px)', backgroundSize: '22px 22px' }}
+                  />
+                  {p.video && <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/10 to-transparent" />}
+                  <div className="absolute bottom-6 left-7 flex flex-col gap-1">
+                    <span className="grad-text font-heading text-4xl font-bold leading-none">{p.stat}</span>
+                    <span className="text-xs uppercase tracking-[0.1em] text-muted-foreground">{p.statLabel}</span>
+                  </div>
+                </>
+              )}
             </div>
             <div className="flex flex-1 flex-col gap-3.5">
               <span className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">{p.tag}</span>
