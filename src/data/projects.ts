@@ -18,6 +18,8 @@ export type Project = {
   from: string;
   video?: string;
   image?: string;
+  // YouTube video id for a walkthrough, embedded on the project's detail page.
+  youtube?: string;
   link?: string;
 };
 
@@ -25,6 +27,11 @@ export type Project = {
 // else is a live demo.
 export const linkLabel = (url: string) =>
   new URL(url).hostname === 'github.com' ? 'View on GitHub' : 'See demo';
+
+// URL slug for a project's detail page, derived from its headline
+// ("Cut+Dry" -> "cut-dry", "SWMS Core UI" -> "swms-core-ui").
+export const projectSlug = (p: Project) =>
+  p.headline.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 // How many projects (from the top of the list) are shown on the home page.
 // Everything after this is only on /projects.
@@ -74,6 +81,7 @@ export const projects: Project[] = [
     tech: ['nextjs', 'typescript', 'tailwindcss', 'postgresql'],
     from: 'from-cosmic-blue/22 to-cosmic-purple/16',
     video: hotelPmsVideo,
+    youtube: 'axkCbGQITDI',
     link: 'https://thalkotevillas.com',
   },
   {

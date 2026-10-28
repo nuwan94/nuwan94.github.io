@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { projects, linkLabel } from '@/data/projects';
+import { projects, projectSlug, linkLabel } from '@/data/projects';
 import { TechIconTooltip, techLabels } from './tech-icons';
 import { ArrowRightIcon } from './icons';
 
@@ -51,13 +51,9 @@ export function CaseStudies({ limit, standalone }: { limit?: number; standalone?
             <div className="flex flex-1 flex-col gap-3.5">
               <span className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">{p.tag}</span>
               <h3 className="font-heading text-2xl font-semibold">
-                {p.link ? (
-                  <a href={p.link} target="_blank" rel="noreferrer" className="transition-colors hover:text-cosmic-blue">
-                    {p.headline}
-                  </a>
-                ) : (
-                  p.headline
-                )}
+                <Link to={`/projects/${projectSlug(p)}`} className="transition-colors hover:text-cosmic-blue">
+                  {p.headline}
+                </Link>
               </h3>
               <p className="text-muted-foreground">{p.description}</p>
               <div className="flex flex-wrap items-center gap-2.5 pt-1">
@@ -65,17 +61,26 @@ export function CaseStudies({ limit, standalone }: { limit?: number; standalone?
                   <TechIconTooltip key={name} name={name} label={techLabels[name]} size={20} />
                 ))}
               </div>
-              {p.link && (
-                <a
-                  href={p.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 self-start text-sm font-bold text-cosmic-blue transition-colors hover:text-cosmic-purple"
+              <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <Link
+                  to={`/projects/${projectSlug(p)}`}
+                  className="inline-flex items-center gap-2 text-sm font-bold text-cosmic-blue transition-colors hover:text-cosmic-purple"
                 >
-                  {linkLabel(p.link)}
-                  <ArrowRightIcon width={14} height={14} className="-rotate-45" />
-                </a>
-              )}
+                  Details
+                  <ArrowRightIcon width={14} height={14} />
+                </Link>
+                {p.link && (
+                  <a
+                    href={p.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 text-sm font-bold text-cosmic-blue transition-colors hover:text-cosmic-purple"
+                  >
+                    {linkLabel(p.link)}
+                    <ArrowRightIcon width={14} height={14} className="-rotate-45" />
+                  </a>
+                )}
+              </div>
             </div>
           </div>
         ))}

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import BorderGlow from '@/components/BorderGlow';
-import { projects, linkLabel, type Project } from '@/data/projects';
+import { Link } from 'react-router-dom';
+import { projects, projectSlug, linkLabel, type Project } from '@/data/projects';
 import { TechIconTooltip, techLabels } from './tech-icons';
 import { ArrowRightIcon, ShuffleIcon } from './icons';
 
@@ -58,7 +59,11 @@ export function FeaturedProject() {
             <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-muted-foreground before:h-1.5 before:w-1.5 before:rounded-full before:bg-gradient-to-r before:from-cosmic-blue before:to-cosmic-purple">
               Featured Project · {p.tag}
             </span>
-            <h3 className="font-heading text-xl font-semibold">{p.headline}</h3>
+            <h3 className="font-heading text-xl font-semibold">
+              <Link to={`/projects/${projectSlug(p)}`} className="transition-colors hover:text-cosmic-blue">
+                {p.headline}
+              </Link>
+            </h3>
             <p className="line-clamp-2 text-sm text-muted-foreground">{p.description}</p>
             <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
               <div className="flex flex-wrap items-center gap-2.5">
