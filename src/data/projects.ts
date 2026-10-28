@@ -6,6 +6,7 @@ import planningPokerVideo from '@/assets/planning-poker-video.mp4';
 import hotelPmsVideo from '@/assets/hotel-pms-video.mp4';
 import ratesVideo from '@/assets/rates-video.mp4';
 import devtoolsCover from '@/assets/devtools-cover.png';
+import timetableCover from '@/assets/timetable-cover.png';
 
 export type Project = {
   stat: string;
@@ -110,5 +111,17 @@ export const projects: Project[] = [
     from: 'from-cosmic-purple/22 to-cosmic-blue/16',
     image: devtoolsCover,
     link: 'https://devtools.nuwan.dev',
+  },
+  {
+    stat: '3',
+    statLabel: 'Languages',
+    tag: 'Side Project',
+    headline: 'School Timetable',
+    description:
+      'A free timetable maker for Sri Lankan schools. Generates clash-free class and teacher timetables, arranges daily relief cover, plans term tests, and prints sheets in English, Sinhala and Tamil. Private by design: no account, nothing uploaded, works offline.',
+    tech: ['react', 'vite'],
+    from: 'from-cosmic-blue/22 to-cosmic-purple/16',
+    image: timetableCover,
+    link: 'https://timetable.nuwan.dev',
   },
 ];
