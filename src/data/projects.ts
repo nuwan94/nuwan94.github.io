@@ -7,6 +7,7 @@ import hotelPmsVideo from '@/assets/hotel-pms-video.mp4';
 import ratesVideo from '@/assets/rates-video.mp4';
 import devtoolsCover from '@/assets/devtools-cover.png';
 import timetableCover from '@/assets/timetable-cover.png';
+import taxCover from '@/assets/tax-cover.png';
 
 export type Project = {
   stat: string;
@@ -131,5 +132,17 @@ export const projects: Project[] = [
     from: 'from-cosmic-blue/22 to-cosmic-purple/16',
     image: timetableCover,
     link: 'https://timetable.nuwan.dev',
+  },
+  {
+    stat: '2025/26',
+    statLabel: 'Year of assessment',
+    tag: 'Side Project',
+    headline: 'Tax Simplified',
+    description:
+      'A free Sri Lanka income tax calculator for the 2025/26 year of assessment. Works out salary tax and APIT from payslips or a T-10, USD freelance income at no more than 15%, and bank interest, then shows what you owe or get back. Private by design: figures are saved in your browser only and nothing is uploaded.',
+    tech: ['nextjs', 'react'],
+    from: 'from-cosmic-blue/22 to-cosmic-purple/16',
+    image: taxCover,
+    link: 'https://tax.nuwan.dev',
   },
 ];
