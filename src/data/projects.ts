@@ -47,7 +47,7 @@ export const projects: Project[] = [
     description:
       "Contributing to Cut+Dry's core B2B e-commerce platform, connecting foodservice distributors, restaurants, and manufacturers for online ordering, invoicing, and payments. Re-architecting core application workflows and refactoring backend API contracts to reduce tech debt and improve performance and maintainability.",
     tech: ['java', 'springBoot', 'hibernate', 'react', 'graphql', 'apollographql', 'php', 'circleci', 'aws'],
-    from: 'from-cosmic-blue/22 to-cosmic-purple/16',
+    from: 'from-vice-pink/22 to-vice-orange/16',
     video: cutAndDryVideo,
   },
   {
@@ -58,7 +58,7 @@ export const projects: Project[] = [
     description:
       'Migrating a legacy Oracle Forms-based Warehouse Management System to Java and React, serving thousands of users across 200+ large-scale warehouses worldwide — managing inventory, orders, returns, and reporting.',
     tech: ['java', 'springBoot', 'react', 'redux', 'typescript', 'oracle', 'aws'],
-    from: 'from-cosmic-purple/22 to-cosmic-blue/16',
+    from: 'from-vice-orange/22 to-vice-pink/16',
     video: swmsVideo,
   },
   {
@@ -69,7 +69,7 @@ export const projects: Project[] = [
     description:
       'A React component library wrapping Ant Design with a custom theme — standardizing UI across the warehouse management system with an editable data table and an advanced search module, cutting frontend dev time by 80%.',
     tech: ['react', 'typescript', 'antdesign', 'redux'],
-    from: 'from-cosmic-blue/22 to-cosmic-purple/16',
+    from: 'from-vice-pink/22 to-vice-orange/16',
     video: coreUiVideo,
   },
   {
@@ -80,7 +80,7 @@ export const projects: Project[] = [
     description:
       'End-to-end platform for a luxury boutique villa resort — a public marketing and booking website, plus a full admin property management system with a live booking engine (room types, rate plans, date/guest search, and checkout).',
     tech: ['nextjs', 'typescript', 'tailwindcss', 'postgresql'],
-    from: 'from-cosmic-blue/22 to-cosmic-purple/16',
+    from: 'from-vice-pink/22 to-vice-orange/16',
     video: hotelPmsVideo,
     youtube: 'axkCbGQITDI',
     link: 'https://thalkotevillas.com',
@@ -93,7 +93,7 @@ export const projects: Project[] = [
     description:
       'A real-time collaborative estimation tool for agile teams — synchronized voting over WebSockets, multiple card decks (Fibonacci, T-shirt sizes, Powers of 2), configurable voting timers, and room-based sessions with live reveal/clear, built type-safe end to end.',
     tech: ['react', 'typescript', 'nodejs', 'express', 'socketio', 'tailwindcss'],
-    from: 'from-cosmic-purple/22 to-cosmic-blue/16',
+    from: 'from-vice-orange/22 to-vice-pink/16',
     video: planningPokerVideo,
     link: 'https://github.com/nuwan94/planning-poker',
   },
@@ -105,7 +105,7 @@ export const projects: Project[] = [
     description:
       'A live comparison of exchange rates across Sri Lankan banks. Python scrapers run on a GitHub Actions schedule every 30 minutes and commit the latest rates, feeding a React dashboard that highlights the best USD buying rate, per-bank trend arrows, and a zoomable historical chart.',
     tech: ['python', 'githubActions', 'react', 'vite', 'chartjs', 'tailwindcss'],
-    from: 'from-cosmic-blue/22 to-cosmic-purple/16',
+    from: 'from-vice-pink/22 to-vice-orange/16',
     video: ratesVideo,
     link: 'https://rates.nuwan.dev',
   },
@@ -117,7 +117,7 @@ export const projects: Project[] = [
     description:
       'A playful collection of small developer tools that run entirely in the browser, so nothing you paste is uploaded: JSON formatter, Base64, UUID, regex tester, JWT reader, text diff, SQL formatter, QR codes, and more.',
     tech: ['nextjs', 'react', 'typescript'],
-    from: 'from-cosmic-purple/22 to-cosmic-blue/16',
+    from: 'from-vice-orange/22 to-vice-pink/16',
     image: devtoolsCover,
     link: 'https://devtools.nuwan.dev',
   },
@@ -129,7 +129,7 @@ export const projects: Project[] = [
     description:
       'A free timetable maker for Sri Lankan schools. Generates clash-free class and teacher timetables, arranges daily relief cover, plans term tests, and prints sheets in English, Sinhala and Tamil. Private by design: no account, nothing uploaded, works offline.',
     tech: ['react', 'vite'],
-    from: 'from-cosmic-blue/22 to-cosmic-purple/16',
+    from: 'from-vice-pink/22 to-vice-orange/16',
     image: timetableCover,
     link: 'https://timetable.nuwan.dev',
   },
@@ -141,7 +141,7 @@ export const projects: Project[] = [
     description:
       'A free Sri Lanka income tax calculator for the 2025/26 year of assessment. Works out salary tax and APIT from payslips or a T-10, USD freelance income at no more than 15%, and bank interest, then shows what you owe or get back. Private by design: figures are saved in your browser only and nothing is uploaded.',
     tech: ['nextjs', 'react'],
-    from: 'from-cosmic-blue/22 to-cosmic-purple/16',
+    from: 'from-vice-pink/22 to-vice-orange/16',
     image: taxCover,
     link: 'https://tax.nuwan.dev',
   },

@@ -38,15 +38,15 @@ export function Navbar() {
       >
         <div className="group relative flex h-72 w-14 items-center">
           {/* closed-state hint: a soft glowing tick, hovering anywhere in this rail opens the panel */}
-          <span className="pointer-events-none absolute left-5 h-24 w-[3px] rounded-full bg-gradient-to-b from-cosmic-blue to-cosmic-purple opacity-50 shadow-[0_0_12px_rgba(178,92,255,0.4)] transition-opacity duration-300 group-hover:opacity-0" />
+          <span className="pointer-events-none absolute left-5 h-24 w-[3px] rounded-full bg-gradient-to-b from-vice-pink to-vice-orange opacity-50 shadow-[0_0_12px_rgba(255,138,61,0.4)] transition-opacity duration-300 group-hover:opacity-0" />
 
           {/* glass panel, revealed on hover */}
           <div className="pointer-events-none absolute left-3 -translate-x-2 rounded-2xl border border-white/10 bg-white/[0.04] px-7 py-8 opacity-0 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.6)] backdrop-blur-xl transition-all duration-300 ease-out group-hover:pointer-events-auto group-hover:translate-x-0 group-hover:opacity-100">
             <LineSidebar
               items={items}
-              accentColor="#b25cff"
-              textColor="#9a9cb8"
-              markerColor="#3d3f57"
+              accentColor="#ff8a3d"
+              textColor="#c8b0dc"
+              markerColor="#4b3566"
               proximityRadius={90}
               maxShift={18}
               itemGap={22}
@@ -59,7 +59,7 @@ export function Navbar() {
 
       <button
         onClick={() => goToSection('hero')}
-        className={`fixed left-6 top-6 z-50 flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-cosmic-blue to-cosmic-purple font-heading text-xs font-bold text-white shadow-[0_8px_24px_-8px_rgba(178,92,255,0.4)] transition-all duration-500 ease-out ${
+        className={`fixed left-6 top-6 z-50 flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-vice-pink to-vice-orange font-heading text-xs font-bold text-white shadow-[0_8px_24px_-8px_rgba(255,138,61,0.4)] transition-all duration-500 ease-out ${
           visible ? 'opacity-100 translate-x-0' : 'pointer-events-none -translate-x-3 opacity-0'
         }`}
       >

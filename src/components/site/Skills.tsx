@@ -96,7 +96,7 @@ export function Skills() {
   return (
     <section id="skills" className="relative border-t border-border px-6 py-24 md:px-10">
       <div className="mx-auto mb-14 flex max-w-xl flex-col items-center gap-3.5 text-center">
-        <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-muted-foreground before:h-1.5 before:w-1.5 before:rounded-full before:bg-gradient-to-r before:from-cosmic-blue before:to-cosmic-purple">
+        <span className="eyebrow">
           Skills
         </span>
         <h2 className="font-heading text-4xl font-semibold">What I Work With</h2>
@@ -109,14 +109,14 @@ export function Skills() {
         {categories.map(({ title, icon: Icon, accent, skills }) => (
           <div
             key={title}
-            className="group flex flex-col gap-4 rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-cosmic-blue/50 hover:shadow-[0_20px_45px_-25px_rgba(178,92,255,0.35)]"
+            className="group flex flex-col gap-4 rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-vice-pink/50 hover:shadow-[0_20px_45px_-25px_rgba(255,138,61,0.35)]"
           >
             <div
               className="flex h-11 w-11 items-center justify-center rounded-[10px] border"
               style={{
-                background: accent === 'blue' ? 'linear-gradient(135deg, rgba(91,141,255,0.16), rgba(178,92,255,0.08))' : 'linear-gradient(135deg, rgba(178,92,255,0.16), rgba(91,141,255,0.08))',
+                background: accent === 'blue' ? 'linear-gradient(135deg, rgba(255,61,139,0.16), rgba(255,138,61,0.08))' : 'linear-gradient(135deg, rgba(255,138,61,0.16), rgba(255,61,139,0.08))',
                 borderColor: 'var(--border-strong, rgba(255,255,255,0.16))',
-                color: accent === 'blue' ? 'var(--cosmic-blue)' : 'var(--cosmic-purple)',
+                color: accent === 'blue' ? 'var(--vice-pink)' : 'var(--vice-orange)',
               }}
             >
               <Icon />

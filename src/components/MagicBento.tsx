@@ -32,25 +32,25 @@ const MOBILE_BREAKPOINT = 768;
 
 const cardData: BentoCardProps[] = [
   {
-    color: '#0d0f1c',
+    color: '#1e0e30',
     title: 'Backend & Architecture',
     description: 'Java, Spring Boot, JPA/Hibernate, REST APIs and Microservices — plus IBM MQ, Kafka, and GraphQL for event-driven systems.',
     label: 'Core Strength'
   },
   {
-    color: '#0d0f1c',
+    color: '#1e0e30',
     title: 'Frontend',
     description: 'React, Redux, TypeScript, Next.js — built with Tailwind CSS, tested with Jest and React Testing Library.',
     label: 'React Ecosystem'
   },
   {
-    color: '#0d0f1c',
+    color: '#1e0e30',
     title: 'Databases',
     description: 'PostgreSQL, MySQL, Oracle, PL/SQL, Redis — query tuning and schema design for high-volume systems.',
     label: 'Data'
   },
   {
-    color: '#0d0f1c',
+    color: '#1e0e30',
     title: 'Cloud & DevOps',
     description: 'AWS (ECS/Fargate, S3, RDS, EC2, VPC, IAM), Docker, Terraform, CI/CD with GitHub Actions and Jenkins.',
     label: 'Ship & Scale'

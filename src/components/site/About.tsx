@@ -14,7 +14,7 @@ export function About() {
     <section id="about" className="relative border-t border-border px-6 py-24 md:px-10">
       <div className="mx-auto grid max-w-5xl gap-14 md:grid-cols-[1fr_1.1fr] md:items-center">
         <div className="flex flex-col gap-4">
-          <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-muted-foreground before:h-1.5 before:w-1.5 before:rounded-full before:bg-gradient-to-r before:from-cosmic-blue before:to-cosmic-purple">
+          <span className="eyebrow">
             About
           </span>
           <h2 className="font-heading text-2xl font-semibold leading-snug md:text-[32px]">
@@ -30,14 +30,14 @@ export function About() {
         </div>
 
         <div className="relative flex flex-col">
-          <div className="absolute bottom-2 left-[9px] top-2 w-px bg-gradient-to-b from-cosmic-blue via-cosmic-purple to-cosmic-purple/20" />
+          <div className="absolute bottom-2 left-[9px] top-2 w-px bg-gradient-to-b from-vice-pink via-vice-orange to-vice-orange/20" />
           {journey.map(({ icon: Icon, title, subtitle }, i) => (
             <div key={title} className="relative flex gap-4 pb-6 last:pb-0">
               <span
                 className="z-10 mt-0.5 h-[18px] w-[18px] flex-shrink-0 rounded-full border-2 bg-background"
                 style={{
-                  borderColor: i < 3 ? 'var(--cosmic-blue)' : 'var(--cosmic-purple)',
-                  boxShadow: `0 0 12px ${i < 3 ? 'rgba(91,141,255,0.4)' : 'rgba(178,92,255,0.3)'}`,
+                  borderColor: i < 3 ? 'var(--vice-pink)' : 'var(--vice-orange)',
+                  boxShadow: `0 0 12px ${i < 3 ? 'rgba(255,61,139,0.4)' : 'rgba(255,138,61,0.3)'}`,
                 }}
               />
               <div className="flex flex-1 items-start gap-3">
