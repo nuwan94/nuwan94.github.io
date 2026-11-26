@@ -26,7 +26,7 @@ export function Footer() {
         <div className="flex flex-col justify-between gap-10 md:flex-row">
           <div className="flex max-w-xs flex-col gap-3.5">
             <div className="flex items-center gap-2">
-              <span className="h-[22px] w-[22px] rounded-md bg-gradient-to-br from-vice-pink to-vice-orange" />
+              <span className="h-[22px] w-[22px] rounded-md bg-gradient-to-br from-cosmic-blue to-cosmic-purple" />
               <span className="font-heading text-[15px] font-semibold">Nuwan Alawatta</span>
             </div>
             <p className="text-[13px] text-muted-foreground/70">
@@ -40,7 +40,7 @@ export function Footer() {
                   target={isExternal(href) ? '_blank' : undefined}
                   rel={isExternal(href) ? 'noreferrer' : undefined}
                   aria-label={label}
-                  className="flex h-[34px] w-[34px] items-center justify-center rounded-lg border border-border text-muted-foreground transition-colors hover:border-vice-pink/60 hover:text-foreground"
+                  className="flex h-[34px] w-[34px] items-center justify-center rounded-lg border border-border text-muted-foreground transition-colors hover:border-cosmic-blue/60 hover:text-foreground"
                 >
                   <Icon width={16} height={16} />
                 </a>

@@ -36,7 +36,7 @@ export function TechTicker() {
         logoHeight={30}
         gap={64}
         fadeOut
-        fadeOutColor="#140820"
+        fadeOutColor="#06070d"
         pauseOnHover
         scaleOnHover
         ariaLabel="Technologies I work with"

@@ -31,7 +31,7 @@ export function ProjectPage() {
       <main className="mx-auto flex max-w-5xl flex-col gap-10 px-6 pb-24 pt-32 md:px-10 md:pt-40">
         <Link
           to="/projects"
-          className="inline-flex items-center gap-2 self-start rounded-lg border border-border bg-white/[0.03] px-4 py-2.5 text-sm font-bold text-muted-foreground transition-colors hover:border-vice-pink/60 hover:text-foreground"
+          className="inline-flex items-center gap-2 self-start rounded-lg border border-border bg-white/[0.03] px-4 py-2.5 text-sm font-bold text-muted-foreground transition-colors hover:border-cosmic-blue/60 hover:text-foreground"
         >
           <ArrowRightIcon width={14} height={14} className="rotate-180" />
           All projects
@@ -93,7 +93,7 @@ export function ProjectPage() {
                 href={p.link}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-vice-pink to-vice-orange px-6 py-3.5 text-sm font-bold text-white transition-opacity hover:opacity-90"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-cosmic-blue to-cosmic-purple px-6 py-3.5 text-sm font-bold text-white transition-opacity hover:opacity-90"
               >
                 {linkLabel(p.link)}
                 <ArrowRightIcon width={16} height={16} className="-rotate-45" />
@@ -104,7 +104,7 @@ export function ProjectPage() {
 
         <Link
           to={`/projects/${projectSlug(next)}`}
-          className="group flex items-center justify-between gap-4 rounded-2xl border border-border bg-white/[0.03] p-6 transition-colors hover:border-vice-pink/60"
+          className="group flex items-center justify-between gap-4 rounded-2xl border border-border bg-white/[0.03] p-6 transition-colors hover:border-cosmic-blue/60"
         >
           <span className="flex flex-col gap-1">
             <span className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">Next project</span>

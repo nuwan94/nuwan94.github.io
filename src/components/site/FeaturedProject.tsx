@@ -20,10 +20,10 @@ export function FeaturedProject() {
 
   return (
     <BorderGlow
-      backgroundColor="#1e0e30"
+      backgroundColor="#0d0f1c"
       borderRadius={17}
-      glowColor="335 95% 65%"
-      colors={['#ff3d8b', '#ff8a3d', '#2fd6d0']}
+      glowColor="265 90% 70%"
+      colors={['#5b8dff', '#b25cff', '#5b8dff']}
       animated
       glowIntensity={1.1}
       // BorderGlow's inner wrapper is overflow:auto (flashes a scrollbar) and
@@ -56,11 +56,11 @@ export function FeaturedProject() {
           </div>
 
           <div className="flex flex-col gap-2.5 p-5">
-            <span className="eyebrow">
+            <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-muted-foreground before:h-1.5 before:w-1.5 before:rounded-full before:bg-gradient-to-r before:from-cosmic-blue before:to-cosmic-purple">
               Featured Project · {p.tag}
             </span>
             <h3 className="font-heading text-xl font-semibold">
-              <Link to={`/projects/${projectSlug(p)}`} className="transition-colors hover:text-vice-pink">
+              <Link to={`/projects/${projectSlug(p)}`} className="transition-colors hover:text-cosmic-blue">
                 {p.headline}
               </Link>
             </h3>
@@ -76,7 +76,7 @@ export function FeaturedProject() {
                   href={p.link}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 text-sm font-bold text-vice-pink transition-colors hover:text-vice-orange"
+                  className="inline-flex items-center gap-2 text-sm font-bold text-cosmic-blue transition-colors hover:text-cosmic-purple"
                 >
                   {linkLabel(p.link)}
                   <ArrowRightIcon width={14} height={14} className="-rotate-45" />
@@ -90,7 +90,7 @@ export function FeaturedProject() {
           type="button"
           onClick={() => setP(pickRandom(p))}
           aria-label="Show another random project"
-          className="absolute right-3 top-3 z-10 inline-flex items-center gap-1.5 rounded-lg border border-border bg-background/60 px-2.5 py-1.5 text-xs font-bold text-foreground backdrop-blur transition-colors hover:border-vice-pink/60"
+          className="absolute right-3 top-3 z-10 inline-flex items-center gap-1.5 rounded-lg border border-border bg-background/60 px-2.5 py-1.5 text-xs font-bold text-foreground backdrop-blur transition-colors hover:border-cosmic-blue/60"
         >
           <ShuffleIcon width={14} height={14} />
           Shuffle

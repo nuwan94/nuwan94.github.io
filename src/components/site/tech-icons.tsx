@@ -161,7 +161,7 @@ function Tooltip({ anchor, label }: { anchor: HTMLElement; label: string }) {
   return createPortal(
     <span
       role="tooltip"
-      className="pointer-events-none fixed z-[999] -translate-x-1/2 -translate-y-[calc(100%+10px)] whitespace-nowrap rounded-md border border-white/10 bg-[#1a0c2a] px-2.5 py-1 text-xs font-medium text-foreground shadow-[0_12px_30px_-10px_rgba(0,0,0,0.6)]"
+      className="pointer-events-none fixed z-[999] -translate-x-1/2 -translate-y-[calc(100%+10px)] whitespace-nowrap rounded-md border border-white/10 bg-[#11131f] px-2.5 py-1 text-xs font-medium text-foreground shadow-[0_12px_30px_-10px_rgba(0,0,0,0.6)]"
       style={{ left: pos.x, top: pos.y }}
     >
       {label}

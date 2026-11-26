@@ -24,7 +24,7 @@ export function StatCounter({ target, suffix = '+', label }: { target: number; s
 
   return (
     <div ref={ref} className="flex flex-col items-center gap-1 text-center">
-      <div className="flex items-baseline text-vice-pink">
+      <div className="flex items-baseline text-cosmic-blue">
         <Counter
           value={value}
           fontSize={40}

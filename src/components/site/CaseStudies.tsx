@@ -12,7 +12,7 @@ export function CaseStudies({ limit, standalone }: { limit?: number; standalone?
       className={`relative flex flex-col gap-16 px-6 py-24 md:px-10 ${standalone ? '' : 'border-t border-border'}`}
     >
       <div className="mx-auto flex flex-col items-center gap-3.5 text-center">
-        <span className="eyebrow">
+        <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-muted-foreground before:h-1.5 before:w-1.5 before:rounded-full before:bg-gradient-to-r before:from-cosmic-blue before:to-cosmic-purple">
           Projects
         </span>
         <h2 className="font-heading text-4xl font-semibold">Things I've Shipped</h2>
@@ -51,7 +51,7 @@ export function CaseStudies({ limit, standalone }: { limit?: number; standalone?
             <div className="flex flex-1 flex-col gap-3.5">
               <span className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">{p.tag}</span>
               <h3 className="font-heading text-2xl font-semibold">
-                <Link to={`/projects/${projectSlug(p)}`} className="transition-colors hover:text-vice-pink">
+                <Link to={`/projects/${projectSlug(p)}`} className="transition-colors hover:text-cosmic-blue">
                   {p.headline}
                 </Link>
               </h3>
@@ -64,7 +64,7 @@ export function CaseStudies({ limit, standalone }: { limit?: number; standalone?
               <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
                 <Link
                   to={`/projects/${projectSlug(p)}`}
-                  className="inline-flex items-center gap-2 text-sm font-bold text-vice-pink transition-colors hover:text-vice-orange"
+                  className="inline-flex items-center gap-2 text-sm font-bold text-cosmic-blue transition-colors hover:text-cosmic-purple"
                 >
                   Details
                   <ArrowRightIcon width={14} height={14} />
@@ -74,7 +74,7 @@ export function CaseStudies({ limit, standalone }: { limit?: number; standalone?
                     href={p.link}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-2 text-sm font-bold text-vice-pink transition-colors hover:text-vice-orange"
+                    className="inline-flex items-center gap-2 text-sm font-bold text-cosmic-blue transition-colors hover:text-cosmic-purple"
                   >
                     {linkLabel(p.link)}
                     <ArrowRightIcon width={14} height={14} className="-rotate-45" />
@@ -89,7 +89,7 @@ export function CaseStudies({ limit, standalone }: { limit?: number; standalone?
       {limit && projects.length > limit && (
         <Link
           to="/projects"
-          className="mx-auto inline-flex items-center gap-2 rounded-lg border border-border bg-white/[0.03] px-6 py-3.5 text-sm font-bold transition-colors hover:border-vice-pink/60"
+          className="mx-auto inline-flex items-center gap-2 rounded-lg border border-border bg-white/[0.03] px-6 py-3.5 text-sm font-bold transition-colors hover:border-cosmic-blue/60"
         >
           Show More Projects
           <ArrowRightIcon width={16} height={16} />

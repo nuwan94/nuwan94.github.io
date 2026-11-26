@@ -9,11 +9,11 @@ const terminalTabs = [
     file: 'stack.json',
     content: (
       <>
-        <div><span className="text-vice-pink">"role"</span>: <span className="text-muted-foreground">"Full-Stack Engineer"</span>,</div>
-        <div><span className="text-vice-pink">"backend"</span>: [<span className="text-vice-orange">"Java"</span>, <span className="text-vice-orange">"Spring Boot"</span>, <span className="text-vice-orange">"JPA"</span>],</div>
-        <div><span className="text-vice-pink">"frontend"</span>: [<span className="text-vice-orange">"React"</span>, <span className="text-vice-orange">"Redux"</span>, <span className="text-vice-orange">"TypeScript"</span>],</div>
-        <div><span className="text-vice-pink">"cloud"</span>: [<span className="text-vice-orange">"AWS"</span>, <span className="text-vice-orange">"Docker"</span>, <span className="text-vice-orange">"Terraform"</span>],</div>
-        <div><span className="text-vice-pink">"status"</span>: <span className="text-muted-foreground">"open to work"</span></div>
+        <div><span className="text-cosmic-blue">"role"</span>: <span className="text-muted-foreground">"Full-Stack Engineer"</span>,</div>
+        <div><span className="text-cosmic-blue">"backend"</span>: [<span className="text-cosmic-purple">"Java"</span>, <span className="text-cosmic-purple">"Spring Boot"</span>, <span className="text-cosmic-purple">"JPA"</span>],</div>
+        <div><span className="text-cosmic-blue">"frontend"</span>: [<span className="text-cosmic-purple">"React"</span>, <span className="text-cosmic-purple">"Redux"</span>, <span className="text-cosmic-purple">"TypeScript"</span>],</div>
+        <div><span className="text-cosmic-blue">"cloud"</span>: [<span className="text-cosmic-purple">"AWS"</span>, <span className="text-cosmic-purple">"Docker"</span>, <span className="text-cosmic-purple">"Terraform"</span>],</div>
+        <div><span className="text-cosmic-blue">"status"</span>: <span className="text-muted-foreground">"open to work"</span></div>
       </>
     ),
   },
@@ -21,17 +21,17 @@ const terminalTabs = [
     file: 'hire-me.json',
     content: (
       <>
-        <div><span className="text-vice-pink">"noticePeriod"</span>: <span className="text-muted-foreground">"1 week"</span>,</div>
-        <div><span className="text-vice-pink">"credentials"</span>: <span className="text-muted-foreground">"MOM-verified degree (SG)"</span>,</div>
+        <div><span className="text-cosmic-blue">"noticePeriod"</span>: <span className="text-muted-foreground">"1 week"</span>,</div>
+        <div><span className="text-cosmic-blue">"credentials"</span>: <span className="text-muted-foreground">"MOM-verified degree (SG)"</span>,</div>
         <div className="flex flex-wrap items-center gap-x-1.5">
-          <span className="text-vice-pink">"coreStack"</span>:<span>[</span>
+          <span className="text-cosmic-blue">"coreStack"</span>:<span>[</span>
           <TechIcon name="java" size={16} />
           <TechIcon name="react" size={16} />
           <TechIcon name="nodejs" size={16} />
           <span>],</span>
         </div>
-        <div><span className="text-vice-pink">"adaptability"</span>: <span className="text-muted-foreground">"fast ramp-up on any stack"</span>,</div>
-        <div><span className="text-vice-pink">"status"</span>: <span className="text-muted-foreground">"ready to start immediately"</span></div>
+        <div><span className="text-cosmic-blue">"adaptability"</span>: <span className="text-muted-foreground">"fast ramp-up on any stack"</span>,</div>
+        <div><span className="text-cosmic-blue">"status"</span>: <span className="text-muted-foreground">"ready to start immediately"</span></div>
       </>
     ),
   },
@@ -47,19 +47,19 @@ export function HeroTerminal() {
 
   return (
     <BorderGlow
-      backgroundColor="#1e0e30"
+      backgroundColor="#0d0f1c"
       borderRadius={17}
-      glowColor="335 95% 65%"
-      colors={['#ff3d8b', '#ff8a3d', '#2fd6d0']}
+      glowColor="265 90% 70%"
+      colors={['#5b8dff', '#b25cff', '#5b8dff']}
       animated
       glowIntensity={1.1}
       className="h-full w-full"
     >
       <div className="flex h-full flex-col overflow-hidden">
         <div className="flex items-center gap-2 border-b border-border px-4 py-2.5">
-          <span className="h-2 w-2 rounded-full bg-[#4b3566]" />
-          <span className="h-2 w-2 rounded-full bg-[#4b3566]" />
-          <span className="h-2 w-2 rounded-full bg-[#4b3566]" />
+          <span className="h-2 w-2 rounded-full bg-[#3d3f57]" />
+          <span className="h-2 w-2 rounded-full bg-[#3d3f57]" />
+          <span className="h-2 w-2 rounded-full bg-[#3d3f57]" />
           <div className="ml-2 flex items-center gap-1">
             {terminalTabs.map((t, idx) => (
               <button
